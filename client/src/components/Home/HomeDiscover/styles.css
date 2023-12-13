@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+.homeDiscoverCard{
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-inline: 90px;
+}
+
+.DiscoverCardMain{
+    display: flex;
+    gap: 24px;
+    width: 648px;
+    height: 200px;
+    border-radius: 5px;
+border: 1px solid var(--Dark-06, #E8E8E8);
+background: #FFF;
+}
+
+.DiscoverCardMain h3{
+    margin-top: 10px;
+    text-align: left;
+    width: 377px;
+    height: 38px;
+    color: var(--Dark-02, #4A4A4A);
+font-family: Poppins;
+font-size: 25px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.discoverCardDesc{
+    text-align: left;
+    width: 397px;
+    color: var(--Dark-03, #777);
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.discoverCardPrice{
+    text-align: left;
+    color: #289BDE;
+font-family: Poppins;
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.homeDiscoverHead{
+ 
+    margin-top: 100px;
+    text-align: center;
+    margin-inline: auto;
+    width: 549px;
+    color: var(--Dark-01, #1D1D1D);
+text-align: center;
+font-family: Poppins;
+font-size: 45px;
+font-style: normal;
+font-weight: 600;
+line-height: 60px; /* 133.333% */
+}
+
+.homeDiscoverSubHead{
+    margin-bottom: 30px;
+    margin-inline: auto;
+    width: 606px;
+    color: var(--Dark-03, #777);
+text-align: center;
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 30px; /* 187.5% */
+}
+
+.discoverCardButt{
+   text-wrap: nowrap;
+    width: 248px;
+    margin-inline: 640px;
+    margin-top: 50px;
+    padding: 13px 33px;
+    border-radius: 5px;
+border: 1px solid #289BDE;
+background: #289BDE;
+color: #FFF;
+text-align: center;
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.discoverCardButt:hover{
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: #FFF;
+    color: #289BDE;
+}

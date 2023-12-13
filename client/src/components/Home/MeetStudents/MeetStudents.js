@@ -1,0 +1,66 @@
+import React from 'react'
+
+import './styles.css'
+
+import { studentDetails } from '../../../constants/constants'
+import coursera from '../../../assets/coursera.png'
+import indeed from '../../../assets/indeed.png'
+import education from '../../../assets/education.png'
+import udemy from '../../../assets/udemy.png'
+import fedEx from '../../../assets/fedEx.png'
+import elecom from '../../../assets/elecom.png'
+
+
+const TrustedByCard = () => {
+    return(
+        <div className='trustedByCardMain'>
+            <h2>Trusted by over 800+ companies</h2>
+            <div className='trustedByCardDiv'>
+                <img src={coursera}/>
+                <img src={udemy}/>
+                <img src={fedEx}/>
+                <img src={education}/>
+                <img src={elecom}/>
+                <img src={indeed}/>
+            </div>
+        </div>
+    )
+}
+
+
+const StudentCard = ({ img, name, position}) => {
+    return(
+     <div className='meetStudentsCardDiv'>
+        <img src={img}/>
+        <h3>{name}</h3>
+        <p>{position}</p>
+     </div>
+    )
+}
+
+const MeetStudents = () => {
+  return (
+    <>
+    <div className='meetStudentsMain'>
+        <h2>Meet Our Successfull Students</h2>
+        <p className='meetStudentsSubText'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+        <div className='meetStudentsCardMainDiv'>
+            {
+          studentDetails.map((data) => (
+
+              <StudentCard 
+              img={data.img}
+              name={data.name}
+              position={data.position}
+              />
+          ))
+            }
+        </div>
+    </div>
+
+   <TrustedByCard />
+    </>
+  )
+}
+
+export default MeetStudents

@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+
+.meetStudentsMain{
+    margin-top: 130px;
+    width: 1320px;
+    margin-inline: auto;
+}
+.meetStudentsMain h2{
+    margin: 0;
+    width: 549px;
+    text-align: left;
+    color: var(--Dark-01, #1D1D1D);
+    font-family: Poppins;
+    font-size: 45px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 60px; /* 133.333% */
+}
+
+.meetStudentsSubText{
+    width: 556px;
+    text-align: left;
+
+    color: var(--Dark-03, #777);
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 30px; /* 187.5% */
+}
+
+
+.meetStudentsCardMainDiv{
+    /* margin-inline: auto; */
+    display: flex;
+    gap: 24px;
+}
+
+.meetStudentsCardDiv{
+    width: 312px;
+    height: 400px;
+    border-radius: 5px;
+border: 1px solid var(--Dark-06, #E8E8E8);
+background: #FFF;
+}
+
+.meetStudentsCardDiv h3{ 
+    margin-bottom: 8px;
+    margin-left: 24px;
+    text-align: left;
+    color: var(--Dark-02, #4A4A4A);
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.meetStudentsCardDiv p{
+    margin-left: 24px;
+    margin-top: 0;
+    text-align: left;
+    color: var(--Dark-03, #777);
+font-family: Poppins;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.trustedByCardMain {
+    margin-inline: auto;
+    margin-top: 130px;
+width: 1320px;
+
+}
+
+.trustedByCardMain h2{
+    margin: 0 0 34px 0 ;
+    color: var(--Dark-01, #1D1D1D);
+text-align: center;
+font-family: Poppins;
+font-size: 45px;
+font-style: normal;
+font-weight: 600;
+line-height: 60px; /* 133.333% */
+}
+
+.trustedByCardDiv{
+    display: flex;
+    gap: 75px;
+}

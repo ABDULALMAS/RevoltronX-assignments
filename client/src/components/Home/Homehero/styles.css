@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+.homeHeroNav{
+    margin-top: 30px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 176px;
+}
+
+.homeHeroNav ul {
+    
+    
+    display: flex;
+    width: 666px;
+    gap: 80px;
+}
+
+.homeHeroNav ul li {
+    list-style:  none;
+}
+.homeHeroNav ul li a{
+    text-decoration: none;
+    color: var(--Dark-03, #777);
+text-align: center;
+font-family: Poppins;
+font-size: 18px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.homeHeroRegister{
+    width: 150px;
+    height: 56px;
+    border-radius: 5px;
+border: 1px solid #289BDE;
+color: #289BDE;
+text-align: center;
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+background-color: #fff;
+}
+
+.homeHeroRegister:hover {
+    cursor: pointer;
+    transition: 0.3s;
+    color: #fff;
+    background-color: #289BDE;
+}
+
+
+
+.homeHeroBanner{
+    position: relative;
+    margin-top: 40px;
+    margin-inline: auto;
+    width: 1150px;
+    height: 609.5px;
+    border-radius: 5px;
+    /* background: rgba(29, 29, 29, 0.70); */
+    background: black;
+    
+   
+}
+
+.homeHeroBanner img{
+   
+    object-fit: contain;
+    width: 1150px;
+    height: 609.5px;
+    overflow: hidden;
+    opacity: 0.4;
+}
+
+.homeBannerText{
+    text-align: center;
+    position: absolute;
+    top: 100px;
+    left: 260px;
+}
+
+.homeBannerText h2{
+    width: 632px;
+    color: #FFF;
+text-align: center;
+font-family: Poppins;
+font-size: 65px;
+font-style: normal;
+font-weight: 700;
+line-height: 85px; /* 130.769% */
+}
+
+.homeHeroButt{
+    border-radius: 5px;
+border: 1px solid #289BDE;
+padding: 13px 33px;
+background: #289BDE;
+color: #FFF;
+text-align: center;
+font-family: Poppins;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+.homeHeroButt:hover{
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: #FFF;
+    color: #289BDE;
+}

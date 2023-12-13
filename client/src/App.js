@@ -1,0 +1,104 @@
+import React, { useEffect, useState} from 'react';
+import './App.css';
+import Home from './components/Home/Home';
+import News from './components/News/News';
+// import NavBar from './components/News/Navbar';
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  
+} from "react-router-dom";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { useDispatch } from 'react-redux';
+
+import Auth from './components/auth/Auth';
+import Navbar from './components/Home/Navbar/Navbar';
+import ArticleHome from './components/Articles/ArticleHome/ArticleHome';
+import ArticleDetails from './components/Articles/ArticleDetails/ArticleDetails'
+import MyProfile from './components/MyProfile/MyProfile';
+import { getProfile } from './actions/profile';
+import YoutubeVideos from './components/Videos/YoutubeVideo';
+import Courses from './components/Courses/Courses';
+
+
+function App() {
+ 
+
+  const pageSize = 5;
+  const apiKey = "4ecb88209cbd4d079bbcc5355c86fdaf"
+  const [progress, setProgress] = useState(0)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    
+    dispatch(getProfile());
+  },[dispatch]);
+ 
+  return (
+    <GoogleOAuthProvider clientId="451541305632-fhfu6mpup3lgicouu3ufm9vr0apb55dm.apps.googleusercontent.com">
+      <Router>
+       <Navbar />
+       
+          
+          <Routes>
+
+          <Route
+              path="/edupoint"
+              element={ <Home /> }
+            />
+          <Route
+              path="/"
+              element={ <Home /> }
+            />
+          
+
+          <Route
+              path="/auth"
+              element={ <Auth /> }
+            />
+          <Route
+              path="/myProfile"
+              element={ <MyProfile /> }
+            />
+          <Route
+              path="/articles"
+              element={ <ArticleHome /> }
+            />
+            <Route path="/articles/:id" element={<ArticleDetails />} />
+
+            <Route path="/articles/search" element={<ArticleHome />} />
+
+
+         
+            <Route  path="/news" element={<News setProgress={setProgress} apiKey={apiKey} key="general" pageSize={pageSize} country="in" category="general"/>} />
+          <Route  path="/entertainment" element={<News setProgress={setProgress} apiKey={apiKey} key="entertainment" pageSize={pageSize} country="in" category="entertainment"/>} />
+          <Route  path="/business" element={<News setProgress={setProgress} apiKey={apiKey} key="business" pageSize={pageSize} country="in" category="business"/>} />
+          <Route  path="/general" element={<News setProgress={setProgress} apiKey={apiKey} key="general" pageSize={pageSize} country="in" category="general"/>}/>
+          <Route  path="/health" element={<News setProgress={setProgress} apiKey={apiKey} key="health" pageSize={pageSize} country="in" category="health"/>}/>
+          <Route  path="/science" element={<News setProgress={setProgress} apiKey={apiKey} key="science" pageSize={pageSize} country="in" category="science"/>}/>
+          <Route  path="/sports" element={<News setProgress={setProgress} apiKey={apiKey} key="sports" pageSize={pageSize} country="in" category="sports"/>}/>
+          <Route  path="/technology" element={<News setProgress={setProgress} apiKey={apiKey} key="technology" pageSize={pageSize} country="in" category="technology"/>}/>
+
+        
+          <Route
+              path="/videos"
+              element={ <YoutubeVideos   /> }
+            />
+          <Route
+              path="/courses"
+              element={ <Courses   /> }
+            />
+         
+
+          
+          </Routes>
+        
+      </Router>
+    </GoogleOAuthProvider>
+    
+  );
+}
+
+export default App;
