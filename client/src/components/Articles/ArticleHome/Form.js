@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button, Typography, Paper, Dialog } from "@material-ui/core";
+import { TextField, Button, Typography, Paper, Dialog, MenuItem } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
 import { useNavigate } from "react-router-dom";
+import { useParams } from 'react-router-dom';
+import { Editor } from '@tinymce/tinymce-react';
 
 // import { createPost, updatePost } from "../../actions/posts";
 import useStyles from "./styles";
 import { createArticle , updatePost} from "../../../actions/Articles";
 
 const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
+  const { articleId } = useParams();
+  
   const [postData, setPostData] = useState({
     title: "",
+    category: "",
     message: "",
     tags: [],
     selectedFile: "",
   });
   const post = useSelector((state) =>
-  currentId
-    ? state.articles.articles.find((message) => message._id === currentId)
+  articleId
+    ? state.articles.articles.find((message) => message._id === articleId)
     : null
 );
   const dispatch = useDispatch();
@@ -31,7 +36,7 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
 
   const clear = () => {
     
-    setCurrentId(0);
+    // setCurrentId(0);
     setPostData({ title: "", message: "", tags: [], selectedFile: "" });
     // setOpen(false);
     
@@ -45,15 +50,17 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (currentId === 0) {
+    if (articleId === undefined) {
       dispatch(createArticle({ ...postData, name: user?.result?.name, creator: user?.result?._id }, navigate));
-      setOpened(false)
+
+      // setOpened(false)
       clear();
     } else {
       dispatch(
-        updatePost(currentId, { ...postData, name: user?.result?.name })
-      );
-      setOpened(false);
+        updatePost(articleId, { ...postData, name: user?.result?.name }, navigate)
+        );
+        navigate("/articles")
+      // setOpened(false);
       clear();
     }
   };
@@ -71,7 +78,7 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
 //   }
 
   return (
-    <Dialog open={opened}>
+    // <Dialog open={opened}>
     <Paper className={classes.paper} elevation={6}>
       <form
         autoComplete="off"
@@ -80,7 +87,7 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          {currentId ? "Editing" : "Adding"} an Article
+          {articleId ? "Editing" : "Adding"} an Article
         </Typography>
 
         <TextField
@@ -91,17 +98,53 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
           value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
-        <TextField
-          name="Message"
-          variant="outlined"
-          label="Message"
-          fullWidth
-          value={postData.message}
-          onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
-          }
+       <TextField 
+          className={classes.TextField} 
+          select
+         name='gender'
+         variant="outlined"
+         label="Select Category"
+         fullWidth
+         value={postData.category}
+         onChange={(e) => setPostData({ ...postData, category: e.target.value})}
+         >
+          <MenuItem value="Tech">Tech </MenuItem>
+          <MenuItem value="Business">Business</MenuItem>
+          <MenuItem value="Entertainment">Entertainment</MenuItem>
+          <MenuItem value="Sports">Sports</MenuItem>
+          <MenuItem value="Lifestyle">Lifestyle</MenuItem>
+          </TextField>
+        
+        <Editor 
+     className={classes.Editor}
+     
+init={{
+  width: 1000,
+  height: 500,
+  menubar: true,
+  plugins: [
+    'advlist autolink lists link image charmap print preview anchor',
+    'searchreplace visualblocks code fullscreen',
+    'insertdatetime media table paste code help wordcount'
+  ],
+  toolbar: 'undo redo | formatselect | ' +
+  'bold italic backcolor | alignleft aligncenter ' +
+  'alignright alignjustify | bullist numlist outdent indent | ' +
+  'removeformat | help',
+  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+}}
+        textareaName="Message"
+        // fullWidth
+        // initialValue="write your content here..."
+        value={postData.message}
+        onEditorChange={(newText) =>
+          setPostData({ ...postData, message: newText })
+        }
+        
         />
+       
         <TextField
+        style={{marginTop: "20px"}}
           name="Tags"
           variant="outlined"
           label="Tags"
@@ -120,6 +163,8 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
             }
           />
         </div>
+        <div className={classes.buttons}>
+
         <Button
           className={classes.buttonSubmit}
           variant="contained"
@@ -131,6 +176,8 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
           Submit
         </Button>
         <Button
+          className={classes.buttonClear}
+
           variant="contained"
           color="secondary"
           size="small"
@@ -139,9 +186,10 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
         >
           Clear
         </Button>
+        </div>
       </form>
     </Paper>
-    </Dialog>
+    // </Dialog>
   );
 };
 

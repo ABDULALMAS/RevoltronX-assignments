@@ -1,6 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles({
+export default makeStyles((theme) =>({
+  // root: {
+  //   "& .MuiTextField-root": {
+  //     // margin: theme.spacing(1),
+  //   },
+  // },
   media: {
     height: 0,
     paddingTop: "56.25%",
@@ -54,4 +59,19 @@ export default makeStyles({
     display: "block",
     textAlign: "initial",
   },
-});
+  buttonCardDelete: {
+    maxWidth: "24px",
+    padding: "0px",
+     marginTop: '15px',
+     marginBottom: '15px',
+     '&:hover': {
+       color: '#ff0000',
+       backgroundColor: 'rgba(255,0,0,.1)',
+     },
+    },
+    articlePaper: {
+     position: "absolute",
+     top: "0",
+     right: "700px"
+    },
+}));

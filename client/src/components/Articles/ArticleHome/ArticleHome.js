@@ -62,6 +62,7 @@ const ArticleHome = () => {
 
   const addArticle = () => {
     setOpened(true);
+    navigate("/articles/create")
   }
 
   return (
@@ -117,7 +118,7 @@ const ArticleHome = () => {
                 ADD ARTICLE
               </Button>
             </AppBar>
-            <Form currentId={currentId} setCurrentId={setCurrentId} opened={opened} setOpened={setOpened}/>
+{/* <Form currentId={currentId} setCurrentId={setCurrentId} opened={opened} setOpened={setOpened}/> */}
             {!searchQuery && !tags.length && (
               <Paper elevation={6}>
                 <Pagination page={page} />

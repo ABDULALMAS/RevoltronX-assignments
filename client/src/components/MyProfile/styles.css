@@ -26,7 +26,8 @@ line-height: normal;
 }
 
 .homeMainDiv{
-    position: absolute;
+    margin-top: -100px;
+    /* position: absolute; */
     top: 270px;
     margin-left: 360px;
     width: 874px;
@@ -58,8 +59,8 @@ box-shadow: 0px 1.77778px 3.55556px 0px rgba(0, 0, 0, 0.10);
 .upload{
     display: flex;
     position: absolute;
-    top: 10px;
-    left: 180px;
+    top: 250px;
+    left: 550px;
     cursor: pointer;
     justify-content: center;
     align-items: center;
@@ -153,8 +154,8 @@ line-height: normal;
 .createUpload{
     display: flex;
     position: absolute;
-    top: 35px;
-    left: 250px;
+    top: 270px;
+    left: 670px;
     cursor: pointer;
     justify-content: center;
     align-items: center;

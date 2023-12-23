@@ -1,17 +1,24 @@
 import React from "react";
 import { Grid, CircularProgress } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { useParams } from 'react-router-dom';
 
 import Article from "../Article/Article";
 
 import useStyles from "./styles";
 
 const Articles = ({ setCurrentId , currentId}) => {
-  const { articles, isLoading } = useSelector((state) => state.articles);
+  const {selectedCategory} = useParams();
+  let { articles, isLoading } = useSelector((state) => state.articles);
   const classes = useStyles();
   // console.log(articles)
 
   if (!articles?.length && !isLoading) return "No posts";
+
+
+  if(selectedCategory) {
+    articles =  articles.filter((article) => article.category === selectedCategory)
+  }
 
   return isLoading ? (
     <CircularProgress />

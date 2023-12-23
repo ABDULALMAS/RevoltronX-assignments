@@ -18,7 +18,7 @@ import {
     try {
       dispatch({ type: START_LOADING });
       const { data } = await api.fetchArticle(id);
-      console.log(data);
+      // console.log(data);
 
   
       dispatch({ type: FETCH_POST, payload: data });
@@ -33,7 +33,7 @@ export const createArticle = (article, navigate) => async (dispatch) => {
       dispatch({ type: START_LOADING });
   
       const { data } = await api.createArticle(article);
-    //   console.log(data);
+      console.log(data);
       dispatch({ type: CREATE, payload: data });
       
       navigate(`/articles/${data._id}`);
@@ -87,7 +87,7 @@ export const createArticle = (article, navigate) => async (dispatch) => {
   export const likePost = (id) => async (dispatch) => {
     try {
       const { data } = await api.likePost(id);
-      console.log(data)
+      // console.log(data)
       dispatch({ type: UPDATE, payload: data });
     } catch (error) {
       console.log(error);
@@ -105,11 +105,11 @@ export const createArticle = (article, navigate) => async (dispatch) => {
     }
   };
 
-  export const updatePost = (id, post) => async (dispatch) => {
+  export const updatePost = (id, post, navigate) => async (dispatch) => {
     try {
       const { data } = await api.updatePost(id, post);
-  
       dispatch({ type: UPDATE, payload: data });
+      navigate("/articles")
     } catch (error) {
       console.log(error);
     }

@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const articleSchema = mongoose.Schema({
   title: String,
+  category: String,
   message: String,
   name: String,
   creator: String,

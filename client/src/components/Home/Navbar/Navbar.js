@@ -9,12 +9,16 @@ import { MenuListComposition } from '../../Articles/Article/Article';
 import { Button , Card} from '@material-ui/core';
 
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+import  IconButton  from "@material-ui/core/IconButton";
+
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 import notification from "../../../assets/Notification.svg";
 import navAvatar from "../../../assets/navAvatar.png";
@@ -32,11 +36,18 @@ const classes = useStyles()
 
 
   const [open, setOpen] = React.useState(false);
+  const [opened, setOpened] = React.useState(false);
+
   const anchorRef = React.useRef(null);
 
   const handleToggle = (e) => {
     e.stopPropagation();
     setOpen((prevOpen) => !prevOpen);
+    
+  };
+  const handleToggled = (e) => {
+    e.stopPropagation();
+    setOpened((prevOpen) => !prevOpen);
     
   };
 
@@ -49,6 +60,17 @@ const classes = useStyles()
 
     setOpen(false);
   };
+  const handleClosed = (event) => {
+    event.stopPropagation();
+
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpened(false);
+  };
+
+
   const handleProfile = (event) => {
     event.stopPropagation();
     navigate("/myProfile")
@@ -72,6 +94,22 @@ const classes = useStyles()
   }
 
 
+  const handleTech = () => {
+   navigate("/articles/category/Tech")
+  }
+  const handleBusiness = () => {
+   navigate("/articles/category/Business")
+  }
+  const handleEntertainment = () => {
+   navigate("/articles/category/Entertainment")
+  }
+  const handleSports = () => {
+   navigate("/articles/category/Sports")
+  }
+  const handleLifestyle = () => {
+   navigate("/articles/category/Lifestyle")
+  }
+
 
   const handleLogout = (event) => {
     dispatch({ type: "LOGOUT" });
@@ -94,7 +132,77 @@ const classes = useStyles()
     <h1><strong> <a href='/edupoint'>Pro Edu</a></strong></h1>
     <ul>
         <li><a href='/edupoint'>Home</a></li>
-        <li><a href='/articles'>Articles</a></li>
+
+         <div className='articlesDropDown'>
+
+        <li><a href='/articles'>Articles</a>
+        </li>
+        <Stack direction="row" spacing={2}>
+      
+      <Button
+        ref={anchorRef}
+        id="composition-button"
+        style={{color: "white", background: "transparent"}}
+        aria-controls={opened ? 'composition-menu' : undefined}
+        aria-expanded={opened ? 'true' : undefined}
+        aria-haspopup="true"
+        onClick={handleToggled}
+        >
+          
+
+         <ArrowDropDownIcon style={{color: "black", paddingInline: "0px" , margin: "0px" , position: "absolute", right: "40px", background: "transparent"}}/>
+          
+        
+        
+      </Button>
+      <Popper
+        open={opened}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        placement="bottom-start"
+        transition
+        disablePortal
+        style={{height: "88px", zIndex: "10"}}
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin:
+                placement === 'bottom-start' ? 'left top' : 'left bottom',
+            }}
+          >
+            <Paper className={classes.articlePaper}>
+              <ClickAwayListener onClickAway={handleClosed}>
+                <MenuList
+                  autoFocusItem={opened}
+                  id="composition-menu"
+                  aria-labelledby="composition-button"
+                  onKeyDown={handleListKeyDown}
+                  style={{maxWidth: "150px", maxHeight: "300px" , display:"flex", flexDirection: "column", gap: "0px", marginTop: "0", padding: "8px"}}
+                >
+                  <MenuItem style={{cursor: "text", backgroundColor: "#D3D3D3"}}>Select Category</MenuItem>
+                  <MenuItem onClick={handleTech} value="tech" name="tech">Tech</MenuItem>
+                  <MenuItem onClick={handleBusiness}>Business</MenuItem>
+                  <MenuItem onClick={handleEntertainment}>Entertainment</MenuItem>
+                  <MenuItem onClick={handleSports}>Sports</MenuItem>
+                  <MenuItem onClick={handleLifestyle}>Lifestyle</MenuItem>
+
+
+                 
+                  
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
+    
+  </Stack>
+        
+          </div>   
+        
+        
         
         <li><a href='/courses'>Courses</a></li>
         <li><a href='/videos'>Videos</a></li>
@@ -180,7 +288,7 @@ const classes = useStyles()
         
          
         ):(
-          <Link to="/auth" style={{ textDecoration: 'none' }}>
+          <Link to="/auth" style={{ textDecoration: 'none' , marginTop: "40px"}}>
     <button className='homeHeroRegister'> Register </button>
     </Link>
       

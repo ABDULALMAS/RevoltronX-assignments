@@ -14,7 +14,7 @@ const Home = () => {
         <HomeDiscover />
         <Explore />
         <MeetStudents />
-        <Footer />
+        
     </div>
   )
 }

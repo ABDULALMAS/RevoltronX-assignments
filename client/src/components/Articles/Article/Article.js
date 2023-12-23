@@ -32,9 +32,12 @@ import Form from "../ArticleHome/Form";
 
 
 
-const Article = ({ post, setCurrentId , currentId}) => {
+
+
+const Article = ({ post, setCurrentId , currentId, }) => {
   const classes = useStyles();
   const navigate = useNavigate();
+ 
   const dispatch = useDispatch();
   const [likes, setLikes] = useState(post?.likes);
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -64,6 +67,7 @@ const Article = ({ post, setCurrentId , currentId}) => {
     event.stopPropagation();
     setCurrentId(post._id)
     setOpened(true);
+    navigate(`/articles/edit/${post._id}`)
 
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -239,7 +243,8 @@ const Article = ({ post, setCurrentId , currentId}) => {
         </Typography>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            {post.message.split(" ").splice(0, 20).join(" ")}...
+          <div dangerouslySetInnerHTML={{ __html: post.message.split(" ").splice(0, 20).join(" ")+ "..."}}/>
+            {/* {post.message.split(" ").splice(0, 20).join(" ")}... */}
           </Typography>
         </CardContent>
       </ButtonBase>
@@ -264,7 +269,7 @@ const Article = ({ post, setCurrentId , currentId}) => {
         )}
       </CardActions>
     </Card>
-    <Form currentId={currentId} setCurrentId={setCurrentId} opened={opened} setOpened={setOpened}/>
+    {/* <Form currentId={currentId} setCurrentId={setCurrentId} opened={opened} setOpened={setOpened}/> */}
     </>
   );
   

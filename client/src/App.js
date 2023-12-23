@@ -22,13 +22,15 @@ import MyProfile from './components/MyProfile/MyProfile';
 import { getProfile } from './actions/profile';
 import YoutubeVideos from './components/Videos/YoutubeVideo';
 import Courses from './components/Courses/Courses';
+import Form from './components/Articles/ArticleHome/Form';
+import Footer from './components/Home/Footer/Footer';
 
 
 function App() {
- 
-
+  
+  console.log(process.env.REACT_APP_BASE_URL)
   const pageSize = 5;
-  const apiKey = "4ecb88209cbd4d079bbcc5355c86fdaf"
+  const apiKey = process.env.REACT_APP_NEWS_API
   const [progress, setProgress] = useState(0)
   const dispatch = useDispatch();
   useEffect(() => {
@@ -69,6 +71,8 @@ function App() {
             <Route path="/articles/:id" element={<ArticleDetails />} />
 
             <Route path="/articles/search" element={<ArticleHome />} />
+            <Route path="/articles/create" element={<Form />} />
+            <Route path="/articles/edit/:articleId" element={<Form />} />
 
 
          
@@ -90,11 +94,15 @@ function App() {
               path="/courses"
               element={ <Courses   /> }
             />
+          <Route
+              path="/articles/category/:selectedCategory"
+              element={ <ArticleHome   /> }
+            />
          
 
           
           </Routes>
-        
+        <Footer />
       </Router>
     </GoogleOAuthProvider>
     

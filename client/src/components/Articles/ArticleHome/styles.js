@@ -28,10 +28,13 @@ export default makeStyles((theme) => ({
     },
   },
   paper: {
+    marginInline: "auto",
+    height: "130vh",
+    width: "82%",
     padding: theme.spacing(2),
   },
   form: {
-    width: "400px",
+    width: "100%",
     height: "500px",
     display: "flex",
     flexWrap: "wrap",
@@ -42,7 +45,24 @@ export default makeStyles((theme) => ({
     margin: "10px 0",
   },
   buttonSubmit: {
-    // width: "300px",
+    display: "flex",
+    height: "45px",
+    
+    width: "250px",
     marginBottom: 10,
   },
+  buttonClear: {
+    // display: "inline-block",
+    width: "250px",
+    height: "45px",
+    marginBottom: 10,
+  },
+  buttons: {
+    display: "flex",
+    flexDirection: "column"
+  },
+  Editor : {
+    marginBottom: "20px",
+  }
+ 
 }));
