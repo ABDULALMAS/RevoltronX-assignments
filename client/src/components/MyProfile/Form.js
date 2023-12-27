@@ -1,28 +1,33 @@
+/* eslint-disable */
 import React,{ useState, useEffect} from 'react'
+import { ThemeProvider, createTheme} from '@mui/material/styles'
 
 import {
-    Avatar,
+    
     Button,
     Paper,
-    Grid,
+   
     Typography,
     Container,
     TextField,
     Dialog,
     MenuItem,
-} from "@material-ui/core";
+} from "@mui/material";
     
 import FileBase from "react-file-base64";
 
 import "./styles.css";
 
-import useStyles from "./styles";
+// import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createProfile , updateProfile} from '../../actions/profile';
 
 
+
 const Form = ({edit, setEdit, currentId, setCurrentId, upload, setUpload}) => {
+  let theme = createTheme();
+
     const user = JSON.parse(localStorage.getItem("profile"));
 
     const post = useSelector((state) =>
@@ -31,7 +36,6 @@ const Form = ({edit, setEdit, currentId, setCurrentId, upload, setUpload}) => {
       : null
   );
 
-console.log(currentId)
   useEffect(() => {
     if (post) setProfileData(post);
   }, [post]);
@@ -49,7 +53,7 @@ console.log(currentId)
         DOB: "",
         phoneNumber: ""
        })
-    const classes = useStyles();
+    // const classes = useStyles();
 
 
     const clear = () => {
@@ -63,6 +67,8 @@ console.log(currentId)
         phoneNumber: "" });
         setEdit(false)
       };
+
+      
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -86,19 +92,24 @@ console.log(currentId)
       }
   return (
     <>
+    <ThemeProvider theme={theme}>
     <Dialog open={edit}>
         
-      <Paper className={classes.paper}>
+      <Paper sx={{display: "flex",
+  padding: theme.spacing(2),}}>
           <form  autoComplete="off"
   noValidate
-  className={`${classes.root} ${classes.form}`}
+ style={{  display: "flex",
+ flexWrap: "wrap",
+ justifyContent: "center",
+ margin: theme.spacing(1),}}
   onSubmit={handleSubmit}>
-          <Typography variant="h6">
+          <Typography variant="h6" sx={{margin: theme.spacing(1)}}>
         Editing Profile
   </Typography>
          
          <TextField
-         className={classes.TextField} 
+         sx={{marginBottom: "10px"}} 
          name='name'
          variant="outlined"
          label="Your Name"
@@ -107,7 +118,7 @@ console.log(currentId)
          onChange={(e) => setProfileData({ ...profileData, name: e.target.value})}
          />
          <TextField 
-          className={classes.TextField} 
+           sx={{marginBottom: "10px"}}
          name='email'
          variant="outlined"
          label="Your Email"
@@ -117,7 +128,7 @@ console.log(currentId)
          />
        
          <TextField 
-          className={classes.TextField} 
+           sx={{marginBottom: "10px"}} 
          name='age'
          variant="outlined"
          label="Your Age"
@@ -126,7 +137,7 @@ console.log(currentId)
          onChange={(e) => setProfileData({ ...profileData, age: e.target.value})}
          />
          <TextField 
-          className={classes.TextField} 
+         sx={{marginBottom: "10px"}}
           select
          name='gender'
          variant="outlined"
@@ -141,7 +152,7 @@ console.log(currentId)
 
           <TextField 
           type='date'
-          className={classes.TextField} 
+          sx={{marginBottom: "10px"}}
          name='DOB'
          variant="outlined"
          label="Date Of Birth"
@@ -152,7 +163,7 @@ console.log(currentId)
          />
 
 <TextField 
-          className={classes.TextField} 
+          sx={{marginBottom: "10px"}}
          name='phoneNumber'
          variant="outlined"
          label="Phone Number"
@@ -163,7 +174,9 @@ console.log(currentId)
 
 
 <Button
-    className={classes.buttonSubmit}
+    sx={{
+      marginBottom: "10px",
+    }}
     variant="contained"
     color="primary"
     size="large"
@@ -173,6 +186,9 @@ console.log(currentId)
     Submit
   </Button>
   <Button
+  sx={{
+    height: "40px",
+  }}
     variant="contained"
     color="secondary"
     size="small"
@@ -191,7 +207,14 @@ console.log(currentId)
             open={upload}
             backdropStyle={{ backgroundColor: 'lightpink' }}
             >
-           <Container className={classes.container}>
+           <Container sx={{
+             margin: "10px",
+             display: "flex",
+           width: "300px",
+           height: "50px",
+           justifyContent: "center",
+           alignItems: "center",
+           }}>
             <Paper className='paper'>
                 <form 
                 autoComplete="off"
@@ -205,7 +228,11 @@ console.log(currentId)
             }
           />
           <Button
-          className={classes.photoSubmit}
+         sx={{
+          margin: "10px",
+          width: "50px",
+          height: "20px",
+         }}
           variant="contained"
           color="primary"
           size="large"
@@ -218,6 +245,7 @@ console.log(currentId)
             </Paper>
            </Container>
            </Dialog>
+           </ThemeProvider>
 </>
   )
 }

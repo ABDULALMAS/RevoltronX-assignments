@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState} from 'react'
 import Form from './Form';
 import './styles.css'
@@ -5,7 +6,7 @@ import './styles.css'
 
 
 export const ProfileComponentCreate = () => {
-  const [edit , setEdit] = useState(false);
+  const [edit , setEdit] = React.useState(false);
   const [upload, setUpload] = useState(false);
   const [currentId , setCurrentId] = useState(0);
 
@@ -26,15 +27,8 @@ export const ProfileComponentCreate = () => {
   }
   return(
 <>
-
-{/* <div>
-         <div className="ellipseDiv"> */}
-
     <button className="createUpload" onClick={handleUpload}>Upload Photo</button> 
-         {/* </div> */}
-         
-
-    <div className="profileNameMain">
+     <div className="profileNameMain">
 
     <div className="profileNameDiv">
         <h3 className="profileHeadText">Your Name</h3>
@@ -60,7 +54,7 @@ export const ProfileComponentCreate = () => {
      <h3 className="profileHeadText">Phone Number</h3>
      <p className="profileSubText">Enter Phone Number</p>
     </div>
- {/* </div> */}
+
 
  </div>
  <button className="profileEditButton" onClick={handleCreate}
@@ -78,7 +72,7 @@ export const ProfileComponentCreate = () => {
 
 
 export const ProfileComponent = ({ profile , myProfile}) => {
-    // const [edit, setEdit] = useState(false);
+    
     const [currentId , setCurrentId] = useState(null);
    const [edit , setEdit] = useState(false);
    const [upload , setUpload] = useState(false);
@@ -98,7 +92,7 @@ export const ProfileComponent = ({ profile , myProfile}) => {
     setEdit(true);
     }
    
-console.log(currentId)
+
         
     
   return (

@@ -1,14 +1,12 @@
 
 import {
-    FETCH_ALL,
-    FETCH_BY_SEARCH,
-    FETCH_POST,
+   
     CREATE,
-    DELETE,
+    
     UPDATE,
     START_LOADING,
     END_LOADING,
-    COMMENT,
+   
     FETCH_ALL_PROFILES
   } from "../constants/actionTypes.js";
 

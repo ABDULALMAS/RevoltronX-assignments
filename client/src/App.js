@@ -1,4 +1,9 @@
+/* eslint-disable */
 import React, { useEffect, useState} from 'react';
+import { ThemeProvider } from "@mui/material/styles";
+
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+
 import './App.css';
 import Home from './components/Home/Home';
 import News from './components/News/News';
@@ -8,7 +13,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
+  
   
 } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -27,8 +32,10 @@ import Footer from './components/Home/Footer/Footer';
 
 
 function App() {
-  
-  console.log(process.env.REACT_APP_BASE_URL)
+
+  let theme = createTheme();
+theme = responsiveFontSizes(theme);
+  // console.log(process.env.REACT_APP_BASE_URL)
   const pageSize = 5;
   const apiKey = process.env.REACT_APP_NEWS_API
   const [progress, setProgress] = useState(0)
@@ -39,6 +46,7 @@ function App() {
   },[dispatch]);
  
   return (
+    <ThemeProvider theme={theme}>
     <GoogleOAuthProvider clientId="451541305632-fhfu6mpup3lgicouu3ufm9vr0apb55dm.apps.googleusercontent.com">
       <Router>
        <Navbar />
@@ -105,7 +113,7 @@ function App() {
         <Footer />
       </Router>
     </GoogleOAuthProvider>
-    
+    </ThemeProvider>
   );
 }
 

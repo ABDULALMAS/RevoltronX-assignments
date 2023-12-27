@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 import "./styles.css";
 
@@ -9,7 +10,7 @@ import { exampleData } from '../../../constants/constants'
 const DiscoverCardComponent = ({ img, heading, description, price}) => {
     return(
         <div className='DiscoverCardMain'>
-            <img src={img}/>
+            <img src={img} alt='img'/>
             <div>
                 <h3>{heading}</h3>
                 <p className='discoverCardDesc'>{description}</p>
@@ -30,6 +31,7 @@ const HomeDiscover = () => {
             exampleData.map((data) =>(
 
                 <DiscoverCardComponent 
+                key={data.id}
                 img={data.img}
                 heading={data.heading}
                 description={data.description}

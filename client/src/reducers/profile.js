@@ -45,6 +45,7 @@
 //             return state;
 //     }
 // };
+/* eslint-disable */
 
 export default (profiles = [], action) => {
   switch (action.type) {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 
 import './styles.css'
@@ -26,7 +27,7 @@ const Explore = () => {
   return (
     <>
     <div className='exploreMain'>
-        <img src={exploreImg}/>
+        <img src={exploreImg} alt='img'/>
         <div>
             <h2 className='exploreHead'>Explore The elearning Institute</h2>
             <p className='exploreSubHead'>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure.<br></br>

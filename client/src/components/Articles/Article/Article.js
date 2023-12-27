@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import {
   Card,
@@ -7,17 +8,19 @@ import {
   Typography,
   CardContent,
   ButtonBase,
-} from "@material-ui/core";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import DeleteIcon from "@material-ui/icons/Delete";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
+  
+} from "@mui/material";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import DeleteIcon from "@mui/icons-material/Delete";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/Articles";
+import './styles.css';
 
-// import Button from '@mui/material/Button';
+
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
@@ -25,8 +28,7 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
-import useStyles from "./styles";
-import Form from "../ArticleHome/Form";
+// import useStyles from "./styles";
 
 
 
@@ -35,7 +37,7 @@ import Form from "../ArticleHome/Form";
 
 
 const Article = ({ post, setCurrentId , currentId, }) => {
-  const classes = useStyles();
+  // const classes = useStyles()   
   const navigate = useNavigate();
  
   const dispatch = useDispatch();
@@ -141,22 +143,49 @@ const Article = ({ post, setCurrentId , currentId, }) => {
   };
   return (
     <>
-    <Card className={classes.card} raised elevation={6}>
+    <Card 
+    sx={{
+      marginTop:"10px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      borderRadius: "15px",
+      height: "100%",
+      position: "relative",
+    }}
+    
+    raised elevation={6}>
       <ButtonBase
+
+      sx={{
+        display: "block",
+        textAlign: "initial",
+      }}
         component="span"
         name="test"
-        className={classes.cardAction}
+      
         onClick={openPost}
       >
+        
         <CardMedia
-          className={classes.media}
+
+        sx={{
+          height: 0,
+    paddingTop: "56.25%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundBlendMode: "darken",
+        }}
+          
           image={
             post.selectedFile ||
             "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
           }
           title={post.title}
         />
-        <div className={classes.overlay}>
+          
+
+        
+        <div className="overlay">
           <Typography variant="h6">{post.name}</Typography>
           <Typography variant="body2">
             {moment(post.createdAt).fromNow()}
@@ -164,17 +193,8 @@ const Article = ({ post, setCurrentId , currentId, }) => {
         </div>
         {(user?.result?.googleId === post?.creator ||
           user?.result?._id === post?.creator) && (
-          <div className={classes.overlay2} name="edit">
-            {/* <Button
-              onClick={(e) => {
-                e.stopPropagation();
-                setCurrentId(post._id);
-              }}
-              style={{ color: "white" }}
-              size="small"
-            >
-              <MoreHorizIcon fontSize="default" />
-            </Button> */}
+          <div className="overlay2" name="edit">
+            
 
 
 
@@ -189,7 +209,7 @@ const Article = ({ post, setCurrentId , currentId, }) => {
           aria-haspopup="true"
           onClick={handleToggle}
         >
-          <MoreHorizIcon fontSize="default" />
+          <MoreHorizIcon fontSize="medium" />
         </Button>
         <Popper
           open={open}
@@ -228,13 +248,17 @@ const Article = ({ post, setCurrentId , currentId, }) => {
     </Stack>
           </div>
         )}
-        <div className={classes.details}>
+        <div className="details">
           <Typography variant="body2" color="textSecondary" component="h2">
             {post.tags.map((tag) => `#${tag} `)}
           </Typography>
         </div>
         <Typography
-          className={classes.title}
+
+        sx={{
+          padding: "0 16px",
+        }}
+          
           gutterBottom
           variant="h5"
           component="h2"
@@ -243,12 +267,18 @@ const Article = ({ post, setCurrentId , currentId, }) => {
         </Typography>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-          <div dangerouslySetInnerHTML={{ __html: post.message.split(" ").splice(0, 20).join(" ")+ "..."}}/>
-            {/* {post.message.split(" ").splice(0, 20).join(" ")}... */}
+          <span dangerouslySetInnerHTML={{ __html: post.message.split(" ").splice(0, 20).join(" ")+ "..."}}/>
           </Typography>
         </CardContent>
       </ButtonBase>
-      <CardActions className={classes.cardActions}>
+      <CardActions 
+      sx={{
+        padding: "0 16px 8px 16px",
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+      
+      >
         <Button
           size="small"
           color="primary"
@@ -269,7 +299,7 @@ const Article = ({ post, setCurrentId , currentId, }) => {
         )}
       </CardActions>
     </Card>
-    {/* <Form currentId={currentId} setCurrentId={setCurrentId} opened={opened} setOpened={setOpened}/> */}
+   
     </>
   );
   

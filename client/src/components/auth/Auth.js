@@ -1,4 +1,5 @@
-import React, { useState , useEffect} from "react";
+/* eslint-disable */
+import React, { useState } from "react";
 
 import {
   Avatar,
@@ -7,10 +8,13 @@ import {
   Grid,
   Typography,
   Container,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import useStyles from "./styles";
+import { ThemeProvider, createTheme} from "@mui/material/styles";
+
+
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+// import useStyles from "./styles";
 import Input from "./Input";
 import Icon from "./icon";
 import { GoogleLogin } from "@react-oauth/google";
@@ -31,7 +35,9 @@ const initialState = {
 };
 
 const Auth = () => {
-  const classes = useStyles();
+  let theme = createTheme();
+
+  // const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState(initialState);
@@ -79,13 +85,27 @@ const Auth = () => {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <Container component="main" maxWidth="xs">
-      <Paper className={classes.paper} elevation={3}>
-        <Avatar className={classes.avatar}>
+      <Paper sx={{
+        marginTop: theme.spacing(8),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        padding: theme.spacing(2),
+        
+      }} elevation={3}>
+        <Avatar sx={{
+           margin: theme.spacing(1),
+           backgroundColor: theme.palette.secondary.main,
+        }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography variant="h5">{isSignUp ? "Sign Up" : "Sign In"}</Typography>
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form  style={{
+          width: "100%",
+          marginTop: theme.spacing(3),
+        }} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             {isSignUp && (
               <>
@@ -132,14 +152,19 @@ const Auth = () => {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            sx={{
+              margin: theme.spacing(3, 0, 2),
+            }}
           >
             {isSignUp ? "Sign Up" : "Sign In"}
           </Button>
           <GoogleLogin
             render={(renderProps) => (
               <Button
-                className={classes.googleButton}
+               sx={{
+    marginBottom: theme.spacing(2),
+
+               }}
                 color="primary"
                 fullWidth
                 onClick={renderProps.onClick}
@@ -167,6 +192,7 @@ const Auth = () => {
         </form>
       </Paper>
     </Container>
+    </ThemeProvider>
   );
 };
 

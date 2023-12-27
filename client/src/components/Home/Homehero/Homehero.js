@@ -1,8 +1,9 @@
-import React , {useState}from 'react';
+/* eslint-disable */
+import React from 'react';
 
 import './styles.css';
 import BannerImg from '../../../assets/HomeHeroBannerImg.png';
-import { Link} from 'react-router-dom'
+
 
 
 const Homehero = () => {
@@ -15,7 +16,7 @@ const Homehero = () => {
   return (
     <div className='homeHeroMain'>
       <div className='homeHeroBanner'>
-        <img src={BannerImg}></img>
+        <img src={BannerImg} alt='img'></img>
         <div className='homeBannerText'>
         <h2>Get Started Digital Learning</h2>
         <button className='homeHeroButt'>Get Started</button>

@@ -1,17 +1,36 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
-import { TextField, Button, Typography, Paper, Dialog, MenuItem } from "@material-ui/core";
+
+import { TextField, Button, Typography, Paper, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
 import { useNavigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
+import { ThemeProvider ,createTheme} from '@mui/material/styles';
 
-// import { createPost, updatePost } from "../../actions/posts";
-import useStyles from "./styles";
+// import {
+//   advlist, autolink, lists ,link, image, charmap, print, preview, anchor,
+//   searchreplace ,visualblocks ,code, fullscreen,
+//   insertdatetime ,media ,table, paste,help, wordcount
+
+// }from 'tinymce/plugins'
+
+// import useStyles from "./styles";
 import { createArticle , updatePost} from "../../../actions/Articles";
 
-const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
-  const { articleId } = useParams();
+const Form = ({ currentId }) => {
+  let theme = createTheme();
+
+
+  const [artId, setArtId] = useState(0);
+  const { articleId } = useParams() ;
+
+
+  useEffect(() => {
+    setArtId(articleId);
+  }, [articleId]);
+  
   
   const [postData, setPostData] = useState({
     title: "",
@@ -21,12 +40,14 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
     selectedFile: "",
   });
   const post = useSelector((state) =>
-  articleId
+  artId
     ? state.articles.articles.find((message) => message._id === articleId)
     : null
 );
+
+
   const dispatch = useDispatch();
-  const classes = useStyles();
+  // const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
   const navigate = useNavigate();
 
@@ -36,9 +57,7 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
 
   const clear = () => {
     
-    // setCurrentId(0);
     setPostData({ title: "", message: "", tags: [], selectedFile: "" });
-    // setOpen(false);
     
   };
 
@@ -50,7 +69,7 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (articleId === undefined) {
+    if (artId === undefined) {
       dispatch(createArticle({ ...postData, name: user?.result?.name, creator: user?.result?._id }, navigate));
 
       // setOpened(false)
@@ -65,32 +84,53 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
     }
   };
 
-  console.log(currentId)
+ 
 
-//   if (!user?.result?.name) {
-//     return (
-//       <Paper className={classes.paper}>
-//         <Typography variant="h6" align="center">
-//           Please Sign In to create your own memories and like other's memories.
-//         </Typography>
-//       </Paper>
-//     );
-//   }
+
 
   return (
-    // <Dialog open={opened}>
-    <Paper className={classes.paper} elevation={6}>
+   <ThemeProvider theme={theme}>
+    <Paper  sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      marginInline: "auto",
+      height: "135vh",
+      width: "82%",
+      padding: theme.spacing(2),
+     
+    }}
+    elevation={6}>
       <form
         autoComplete="off"
         noValidate
-        className={`${classes.root} ${classes.form}`}
+        // className={`${classes.root} ${classes.form}`}
+        sx={{
+          width: "100%",
+          height: "500px",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          "& .MuiTextField-root": {
+            margin: theme.spacing(1),
+          },
+        }}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">
+        <Typography sx={{
+          textAlign: "center",
+          margin: theme.spacing(1),
+         
+        }}variant="h6">
           {articleId ? "Editing" : "Adding"} an Article
+          
         </Typography>
 
         <TextField
+        sx={{
+          marginBlock: theme.spacing(2),
+
+        }}
           name="Title"
           variant="outlined"
           label="Title"
@@ -99,13 +139,17 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
        <TextField 
-          className={classes.TextField} 
+           sx={{
+            marginBlock: theme.spacing(2),
+  
+          }}
           select
-         name='gender'
+          
+         
          variant="outlined"
          label="Select Category"
          fullWidth
-         value={postData.category}
+         value={postData.category || "Tech"}
          onChange={(e) => setPostData({ ...postData, category: e.target.value})}
          >
           <MenuItem value="Tech">Tech </MenuItem>
@@ -115,18 +159,19 @@ const Form = ({ currentId, setCurrentId, opened , setOpened}) => {
           <MenuItem value="Lifestyle">Lifestyle</MenuItem>
           </TextField>
         
-        <Editor 
-     className={classes.Editor}
-     
+        <Editor
+   apiKey="3v1bthfd37q9m337k14zqchmhh3d5sg6ltconwj4za9hnlu5"
+  
 init={{
   width: 1000,
   height: 500,
   menubar: true,
-  plugins: [
-    'advlist autolink lists link image charmap print preview anchor',
-    'searchreplace visualblocks code fullscreen',
-    'insertdatetime media table paste code help wordcount'
-  ],
+  // plugins: [
+  //   'advlist autolink lists link image charmap print preview anchor',
+  //   'searchreplace visualblocks code fullscreen',
+  //   'insertdatetime media table paste code help wordcount'
+  // ],
+ 
   toolbar: 'undo redo | formatselect | ' +
   'bold italic backcolor | alignleft aligncenter ' +
   'alignright alignjustify | bullist numlist outdent indent | ' +
@@ -154,7 +199,10 @@ init={{
             setPostData({ ...postData, tags: e.target.value.split(",") })
           }
         />
-        <div className={classes.fileInput}>
+        <div style={{
+          width: "97%",
+              margin: "10px 0",
+        }}>
           <FileBase
             type="file"
             multiple={false}
@@ -163,10 +211,22 @@ init={{
             }
           />
         </div>
-        <div className={classes.buttons}>
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            marginInline: "auto",
+        }}>
 
         <Button
-          className={classes.buttonSubmit}
+        sx={{
+          display: "flex",
+          height: "45px",
+          marginInline: "auto",
+          alignContent: "center",
+          width: "250px",
+          marginBottom: "10px",
+        }}
+          
           variant="contained"
           color="primary"
           size="large"
@@ -176,7 +236,15 @@ init={{
           Submit
         </Button>
         <Button
-          className={classes.buttonClear}
+         sx={{
+          display: "flex",
+          height: "45px",
+          marginInline: "auto",
+          
+          width: "250px",
+          marginBottom: "10px",
+        }}
+        
 
           variant="contained"
           color="secondary"
@@ -189,8 +257,10 @@ init={{
         </div>
       </form>
     </Paper>
-    // </Dialog>
+   
+</ThemeProvider>
   );
 };
 
 export default Form;
+

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable */
+import React, { useState } from "react";
 import {
   Container,
   Grow,
@@ -7,12 +8,16 @@ import {
   AppBar,
   TextField,
   Button,
-} from "@material-ui/core";
+  
+} from "@mui/material";
 import { useDispatch } from "react-redux";
-import useStyles from "./styles";
+import { ThemeProvider ,createTheme} from '@mui/material/styles';
+
+// import useStyles from "./styles";
 import { useNavigate, useLocation } from "react-router-dom";
-import ChipInput from "material-ui-chip-input";
-import Form from "./Form";
+import { MuiChipsInput } from 'mui-chips-input'
+
+
 import Pagination from '../Pagination';
 import Articles from "../AllArticles/Articles";
 
@@ -23,9 +28,12 @@ function useQuery() {
   }
 
 const ArticleHome = () => {
-    const classes = useStyles();
+  let theme = createTheme();
+
+    // const classes = useStyles();
   const [currentId, setCurrentId] = useState(null);
-  const [opened, setOpened] = useState(false);
+ 
+ 
   const query = useQuery();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -52,24 +60,26 @@ const ArticleHome = () => {
   };
 
   const handleAdd = (tag) => {
-    setTags([...tags, tag]);
+    setTags(tag);
   };
-
-  const handleDelete = (tagToDelete) => {
-    setTags(tags.filter((tag) => tag != tagToDelete));
-  };
-
+     
 
   const addArticle = () => {
-    setOpened(true);
     navigate("/articles/create")
   }
 
+
+
   return (
+    <ThemeProvider theme={theme}>
     <Grow in>
       <Container maxWidth="xl">
         <Grid
-          className={classes.gridContainer}
+          sx={{
+            [theme.breakpoints.down("xs")]: {
+              flexDirection: "column-reverse",
+            },
+          }}
           container
           justify="space-between"
           alignItems="stretch"
@@ -80,7 +90,14 @@ const ArticleHome = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <AppBar
-              className={classes.appBarSearch}
+             sx={{
+              marginTop: "1rem",
+              marginRight: "100px",
+              borderRadius: 4,
+              marginBottom: "1rem",
+              display: "flex",
+              padding: "16px",
+             }}
               position="static"
               color="inherit"
             >
@@ -93,17 +110,19 @@ const ArticleHome = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              <ChipInput
+              <MuiChipsInput
                 style={{ margin: "10px 0" }}
                 value={tags}
-                onAdd={handleAdd}
-                onDelete={handleDelete}
+                onChange={handleAdd}
+               
+                
                 label="Search Tags"
                 variant="outlined"
               />
               <Button
+              sx={{  marginBottom: "10px"}}
                 onClick={searchPost}
-                className={classes.searchButton}
+                
                 color="primary"
                 variant="contained"
               >
@@ -111,7 +130,7 @@ const ArticleHome = () => {
               </Button>
               <Button
                 onClick={addArticle}
-                className={classes.addArticleButton}
+                
                 color="primary"
                 variant="contained"
               >
@@ -128,6 +147,7 @@ const ArticleHome = () => {
         </Grid>
       </Container>
     </Grow>
+    </ThemeProvider>
   )
 }
 

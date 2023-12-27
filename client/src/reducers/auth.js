@@ -1,4 +1,4 @@
-import { AUTH, LOGOUT } from "../constants/actionTypes";
+/* eslint-disable */
 
 const authReducer = (state = { authData: null }, action) => {
   switch (action.type) {

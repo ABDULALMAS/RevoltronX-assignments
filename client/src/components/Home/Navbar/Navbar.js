@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState} from 'react'
 
 import './styles.css'
@@ -5,11 +6,11 @@ import './styles.css'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { MenuListComposition } from '../../Articles/Article/Article';
-import { Button , Card} from '@material-ui/core';
+
+import { Button } from '@mui/material';
 
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import  IconButton  from "@material-ui/core/IconButton";
+
 
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
@@ -23,7 +24,7 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import notification from "../../../assets/Notification.svg";
 import navAvatar from "../../../assets/navAvatar.png";
 import arrowDown from "../../../assets/arrowDown.svg"
-import useStyles from "./styles";
+// import useStyles from "./styles";
 
 
 const Navbar = () => {
@@ -31,7 +32,8 @@ const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-const classes = useStyles()
+  const [toggle , setToggle] = useState();
+
 
 
 
@@ -59,6 +61,7 @@ const classes = useStyles()
     }
 
     setOpen(false);
+    
   };
   const handleClosed = (event) => {
     event.stopPropagation();
@@ -68,6 +71,8 @@ const classes = useStyles()
     }
 
     setOpened(false);
+  setToggle(!toggle)
+
   };
 
 
@@ -150,7 +155,18 @@ const classes = useStyles()
         >
           
 
-         <ArrowDropDownIcon style={{color: "black", paddingInline: "0px" , margin: "0px" , position: "absolute", right: "40px", background: "transparent"}}/>
+          { toggle ? (
+
+<ArrowDropUpIcon style={{color: "black", paddingInline: "0px" , margin: "0px" , position: "absolute", right: "40px", background: "transparent"}} onClick={() =>{
+  setToggle(!toggle)
+ }}/>
+): (
+  <ArrowDropDownIcon style={{color: "black", paddingInline: "0px" , margin: "0px" , position: "absolute", right: "40px", background: "transparent"}} onClick={() =>{
+    setToggle(!toggle)
+  }}/>
+  )
+
+}
           
         
         
@@ -172,7 +188,11 @@ const classes = useStyles()
                 placement === 'bottom-start' ? 'left top' : 'left bottom',
             }}
           >
-            <Paper className={classes.articlePaper}>
+            <Paper sx={{
+               position: "absolute",
+               top: "0",
+               right: "700px"
+            }}>
               <ClickAwayListener onClickAway={handleClosed}>
                 <MenuList
                   autoFocusItem={opened}
@@ -216,11 +236,11 @@ const classes = useStyles()
     
 
         <div className="navProfile">
-        <img src={notification} className="notificationBell"/>
+        <img src={notification} alt="img" className="notificationBell"/>
 
         <div className="navProfileDiv">
             <div className="navProfileAvatar">
-              <img src={navAvatar}/>
+              <img src={navAvatar} alt='img'/>
             </div>
             <div className="navProfileText">
               <h3>Welcome back,</h3>
@@ -241,7 +261,7 @@ const classes = useStyles()
           aria-haspopup="true"
           onClick={handleToggle}
         >
-           <img src={arrowDown} className="arrowDown"/>
+           <img src={arrowDown} alt='img' className="arrowDown"/>
         </Button>
         <Popper
           open={open}
@@ -296,7 +316,7 @@ const classes = useStyles()
     }
     
   </div>
-    {/* <MenuListComposition /> */}
+   
     </>
 
   )

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
     FETCH_ALL,
     FETCH_POST,
@@ -20,7 +21,7 @@ import {
       case DELETE:
         return {
           ...state,
-          articles: state.articles.filter((article) => article._id != action.payload),
+          articles: state.articles.filter((article) => article._id !== action.payload),
         };
       case COMMENT:
         return {

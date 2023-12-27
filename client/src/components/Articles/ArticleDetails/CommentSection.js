@@ -1,13 +1,12 @@
+/* eslint-disable */
 import React, { useState, useRef } from "react";
-import { Typography, TextField, Button } from "@material-ui/core";
+import { Typography, TextField, Button, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
 
-import useStyles from "./styles";
 import { commentPost } from "../../../actions/Articles";
 
 const CommentSection = ({ post }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
-  const classes = useStyles();
   const dispatch = useDispatch();
   const [comments, setComments] = useState(post?.comments);
   const [comment, setComment] = useState("");
@@ -23,8 +22,19 @@ const CommentSection = ({ post }) => {
   };
   return (
     <div>
-      <div className={classes.commentsOuterContainer}>
-        <div className={classes.commentsInnerContainer}>
+      <Box 
+      sx={{
+        display: "flex",
+    justifyContent: "space-between",
+      }}
+      >
+        <Box 
+        sx={{
+          height: "200px",
+          overflowY: "auto",
+          marginRight: "30px",
+        }}
+        >
           <Typography gutterBottom variant="h6">
             Comments
           </Typography>
@@ -35,7 +45,7 @@ const CommentSection = ({ post }) => {
             </Typography>
           ))}
           <div ref={commentsRef} />
-        </div>
+        </Box>
         {user?.result?.name && (
           <div style={{ width: "70%" }}>
             <Typography gutterBottom variant="h6">
@@ -62,7 +72,7 @@ const CommentSection = ({ post }) => {
             </Button>
           </div>
         )}
-      </div>
+      </Box>
     </div>
   );
 };

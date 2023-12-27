@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 
 import './styles.css'
@@ -16,12 +17,12 @@ const TrustedByCard = () => {
         <div className='trustedByCardMain'>
             <h2>Trusted by over 800+ companies</h2>
             <div className='trustedByCardDiv'>
-                <img src={coursera}/>
-                <img src={udemy}/>
-                <img src={fedEx}/>
-                <img src={education}/>
-                <img src={elecom}/>
-                <img src={indeed}/>
+                <img src={coursera} alt='img'/>
+                <img src={udemy} alt='img'/>
+                <img src={fedEx} alt='img'/>
+                <img src={education} alt='img'/>
+                <img src={elecom} alt='img'/>
+                <img src={indeed} alt='img'/>
             </div>
         </div>
     )
@@ -31,7 +32,8 @@ const TrustedByCard = () => {
 const StudentCard = ({ img, name, position}) => {
     return(
      <div className='meetStudentsCardDiv'>
-        <img src={img}/>
+        
+        <img src={img} alt='img'/>
         <h3>{name}</h3>
         <p>{position}</p>
      </div>
@@ -49,6 +51,7 @@ const MeetStudents = () => {
           studentDetails.map((data) => (
 
               <StudentCard 
+              key={data.id}
               img={data.img}
               name={data.name}
               position={data.position}

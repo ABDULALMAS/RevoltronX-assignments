@@ -1,15 +1,16 @@
+/* eslint-disable */
 import React, {useEffect} from "react";
-import {Pagination, PaginationItem} from '@material-ui/lab';
+import {Pagination, PaginationItem} from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 
 import { getArticles } from "../../actions/Articles";
  
-import useStyles from "./styles";
+// import useStyles from "./styles";
 
 const Paginate = ({ page}) => { 
   const { numberOfPages } = useSelector((state) => state.articles);
-    const classes = useStyles();
+    // const classes = useStyles();
     const dispatch = useDispatch();
     useEffect(() => {
     if(page) {
@@ -20,8 +21,12 @@ const Paginate = ({ page}) => {
 
 return ( 
     <Pagination 
-    className={classes.pagination}
-      classes={{ul: classes.ul}}
+    sx={{
+      borderRadius: 4,
+    marginTop: "1rem",
+    padding: "16px",
+    }}
+      // classes={{ul: classes.ul}}
       count={numberOfPages} 
       page={Number(page) || 1}
       variant="outlined"

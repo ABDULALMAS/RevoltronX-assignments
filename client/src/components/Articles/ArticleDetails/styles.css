@@ -1,0 +1,13 @@
+.media {
+    border-radius: 20px;
+    object-fit: cover;
+    max-width: 600px;
+    min-height: 400px;
+    max-height: 600px;
+  }
+
+  section {
+    border-radius: 20px;
+    margin: 10px;
+    flex: 1;
+  }
