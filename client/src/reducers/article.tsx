@@ -9,6 +9,8 @@ import {
   START_LOADING,
   END_LOADING,
   COMMENT,
+  FETCH_ARTICLES_TABLE_DATA,
+  UPDATE_ARTICLE_STATUS,
 } from "../constants/actionTypes";
 
 
@@ -77,6 +79,20 @@ export default (state : ArticleState = { isLoading: true, articles: [] }, action
 
     case CREATE:
       return { ...state, articles: [...state.articles, action.payload] };
+
+    case FETCH_ARTICLES_TABLE_DATA:
+      return {
+        ...state,
+        articles: action.payload.data,
+      }
+
+      case UPDATE_ARTICLE_STATUS :
+        return {
+          ...state,
+          articles: state.articles.map((article) => (
+            article._id === action.payload.data._id ? action.payload.data : article
+          ))
+        }
 
     default:
       return state;

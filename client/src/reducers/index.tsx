@@ -1,16 +1,16 @@
 import { combineReducers, Reducer } from "redux";
-import auth, { AuthState } from "./auth";
+import users, { AuthData } from "./auth";
 import articles, { ArticleState } from "./article";
 import profiles, { ProfileState } from "./profile";
 
 export interface RootState {
-  auth: AuthState;
+  users: AuthData;
   articles: ArticleState;
   profiles: ProfileState[];
 }
 
 const rootReducer: Reducer<RootState> = combineReducers({
-  auth,
+  users,
   articles,
   profiles,
 });

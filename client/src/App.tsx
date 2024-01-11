@@ -13,6 +13,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate
   
   
 } from "react-router-dom";
@@ -29,6 +30,8 @@ import YoutubeVideos from './components/Videos/YoutubeVideo';
 import Courses from './components/Courses/Courses';
 import Form from './components/Articles/ArticleHome/Form';
 import Footer from './components/Home/Footer/Footer';
+import Admin from './components/Dashboard/Admin';
+import { getUsers } from './actions/Auth';
 
 
 function App() {
@@ -43,7 +46,11 @@ theme = responsiveFontSizes(theme);
   useEffect(() => {
     
     dispatch<any>(getProfile());
+    dispatch<any>(getUsers());
   },[dispatch]);
+
+  const user = JSON.parse(localStorage.getItem("profile")!);
+
  
   return (
     <ThemeProvider theme={theme}>
@@ -60,7 +67,7 @@ theme = responsiveFontSizes(theme);
             />
           <Route
               path="/"
-              element={ <Home /> }
+              element={ <Navigate to ="/edupoint"/> }
             />
           
 
@@ -105,6 +112,10 @@ theme = responsiveFontSizes(theme);
           <Route
               path="/articles/category/:selectedCategory"
               element={ <ArticleHome   /> }
+            />
+          <Route
+              path="/admin/dashboard"
+              element={user?.result?.role === "administrator" || user?.result?.role ==="approver" ?   <Admin   /> : <Auth />}
             />
          
 
