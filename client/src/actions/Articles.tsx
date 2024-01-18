@@ -8,6 +8,10 @@ import {
   START_LOADING,
   END_LOADING,
   COMMENT,
+<<<<<<< HEAD
+=======
+  FETCH_ARTICLES_TABLE_DATA
+>>>>>>> role-based-access-control
 } from "../constants/actionTypes.tsx";
 import * as api from "../api/index.tsx";
 import { Dispatch } from "redux";
@@ -52,7 +56,12 @@ export const createArticle = (article: NewArticle, navigate: any) => async (disp
    
     dispatch({ type: CREATE, payload: data });
     
+<<<<<<< HEAD
     navigate(`/articles/${data._id}`);
+=======
+    // navigate(`/articles/${data._id}`);
+    navigate("/articles")
+>>>>>>> role-based-access-control
 
     dispatch({ type: END_LOADING });
   } catch (error) {
@@ -124,6 +133,10 @@ export const commentPost = (value: any, id: string) => async (dispatch :any) => 
 export const updatePost = (id: string, post: NewArticle, navigate: any) => async (dispatch :any) => {
   try {
     const { data } = await api.updatePost(id, post);
+<<<<<<< HEAD
+=======
+   
+>>>>>>> role-based-access-control
     dispatch({ type: UPDATE, payload: data });
     navigate("/articles")
   } catch (error) {
