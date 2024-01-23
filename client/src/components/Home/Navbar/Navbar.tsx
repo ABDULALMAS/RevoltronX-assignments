@@ -99,6 +99,16 @@ const Navbar: React.FC<NavbarProps> = () => {
     setOpen(false);
   };
 
+
+  const handleBookMark = (event: React.MouseEvent<EventTarget>) => {
+    event.stopPropagation();
+    navigate("/bookmarks");
+    if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+      return;
+    }
+    setOpen(false);
+  }
+
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -309,8 +319,8 @@ const Navbar: React.FC<NavbarProps> = () => {
                             aria-labelledby='composition-button'
                             onKeyDown={handleListKeyDown}
                             style={{
-                              maxWidth: '118px',
-                              maxHeight: '118px',
+                              maxWidth: '150px',
+                              maxHeight: '150px',
                               display: 'flex',
                               flexDirection: 'column',
                               gap: '0px',
@@ -319,6 +329,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                             }}
                           >
                             <MenuItem onClick={handleProfile}>My Profile</MenuItem>
+                            <MenuItem onClick={handleBookMark}>My BookMarks</MenuItem>
                             {
                               
                               (user?.result?.role === "administrator" || user?.result?.role === "approver") &&(

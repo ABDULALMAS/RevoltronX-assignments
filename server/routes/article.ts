@@ -5,9 +5,11 @@ import { createArticle, getArticles,
      likePost, updatePost, 
      getArticlesTableData,
      updateArticleStatus,
+   
 
 } from "../controllers/article.ts";
 import { getArticlesBySearch } from "../controllers/article.ts";
+import { createHighlights , getHighlights, updateScrollPosition, createNote} from "../controllers/highLights.ts";
 
 import auth from "../middleware/auth.ts";
 
@@ -24,6 +26,13 @@ router.patch("/updateArticleStatus/:id", updateArticleStatus)
 
 
 router.post("/", auth,createArticle);
+
+router.post("/highlights/:id", createHighlights)
+router.get("/highlights/:userId/:tagId",getHighlights)
+router.post("/updateScrollPosition/:id",updateScrollPosition)
+
+router.post("/createNote/:id", createNote)
+
 router.post("/:id/commentPost", auth, commentPost);
 router.patch("/:id/likePost", auth,likePost);
 

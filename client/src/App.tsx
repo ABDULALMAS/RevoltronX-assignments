@@ -32,6 +32,7 @@ import Form from './components/Articles/ArticleHome/Form';
 import Footer from './components/Home/Footer/Footer';
 import Admin from './components/Dashboard/Admin';
 import { getUsers } from './actions/Auth';
+import BookMarks from './components/BookMarks/BookMarks';
 
 
 function App() {
@@ -118,7 +119,9 @@ theme = responsiveFontSizes(theme);
               element={user?.result?.role === "administrator" || user?.result?.role ==="approver" ?   <Admin   /> : <Auth />}
             />
          
-
+           <Route path='/bookmarks' 
+           element= { <BookMarks />}
+           />
           
           </Routes>
         <Footer />
@@ -129,3 +132,4 @@ theme = responsiveFontSizes(theme);
 }
 
 export default App;
+
