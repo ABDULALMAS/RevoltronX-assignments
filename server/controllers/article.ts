@@ -5,8 +5,6 @@ import PostArticle, { PostArticleModel, PostArticleDocument } from '../models/po
 const router = express.Router();
 
 
-
-
 export const getArticlesTableData = async(req: Request, res: Response) => {
   try {
     
