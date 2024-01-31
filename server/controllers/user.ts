@@ -2,18 +2,28 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import UserModel from "../models/user.ts";
+<<<<<<< HEAD
+=======
 import mongoose from "mongoose";
 
+>>>>>>> role-based-access-control
 
 const secret = "testing";
 
 export const signin = async (req: Request, res: Response) => {
   const { email, password } = req.body ;
+<<<<<<< HEAD
+
+  try {
+    const oldUser = await UserModel.findOne({ email });
+    console.log(oldUser)
+=======
  
 
   try {
     const oldUser = await UserModel.findOne({ email });
     
+>>>>>>> role-based-access-control
 
     if (!oldUser)
       return res.status(404).json({ message: "User doesn't exist" });
@@ -42,7 +52,10 @@ export const signin = async (req: Request, res: Response) => {
 
 export const signup = async (req: Request, res: Response) => {
   const { email, password, firstName, lastName } = req.body;
+<<<<<<< HEAD
+=======
   
+>>>>>>> role-based-access-control
 
   try {
     const oldUser = await UserModel.findOne({ email });
@@ -73,6 +86,8 @@ export const signup = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+<<<<<<< HEAD
+=======
 
 export const getUsers = async (req: Request, res: Response) => {
 try {
@@ -113,3 +128,4 @@ else{
     res.status(500).json({ message: 'Internal Server Error' });
   }
 }
+>>>>>>> role-based-access-control

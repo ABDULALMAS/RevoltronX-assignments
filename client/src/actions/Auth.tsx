@@ -16,19 +16,28 @@ export const signin = (formData: FormState, navigate: any) => async (dispatch : 
   
 
     dispatch({ type: "AUTH", data });
+<<<<<<< HEAD
+
+    navigate("/edupoint");
+    
+=======
  
    
  
     navigate("/");
   
+>>>>>>> role-based-access-control
   } catch (error) {
     console.log(error);
   }
 };
+<<<<<<< HEAD
+=======
 
    
 
     
+>>>>>>> role-based-access-control
 export const signup = (formData: FormState, navigate: any) => async (dispatch : any) => {
   try {
     const { data } = await api.signUp(formData);
@@ -41,6 +50,9 @@ export const signup = (formData: FormState, navigate: any) => async (dispatch : 
   } catch (error) {
     console.log(error);
   }
+<<<<<<< HEAD
+};
+=======
 };
 export const getUsers = () => async (dispatch : any) => {
   try {
@@ -75,3 +87,4 @@ try {
   console.log(error);
 }
 }
+>>>>>>> role-based-access-control

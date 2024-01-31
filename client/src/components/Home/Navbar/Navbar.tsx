@@ -1,5 +1,6 @@
 // /* eslint-disable */
 
+
 import React, { useState , useEffect} from 'react';
 import './styles.css';
 import { Link } from 'react-router-dom';
@@ -18,6 +19,7 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import notification from '../../../assets/Notification.svg';
 import navAvatar from '../../../assets/navAvatar.png';
 import arrowDown from '../../../assets/arrowDown.svg';
+
 import { useLocation } from "react-router-dom";
 
 
@@ -29,13 +31,13 @@ const Navbar: React.FC<NavbarProps> = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')!));
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const location = useLocation();
 
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [opened, setOpened] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement | null>(null);
-
   
 
 
@@ -138,6 +140,15 @@ const Navbar: React.FC<NavbarProps> = () => {
     navigate('/articles/category/Lifestyle');
   };
 
+  const handleLogout = (event: React.MouseEvent<EventTarget>) => {
+    dispatch({ type: 'LOGOUT' });
+    navigate('/auth');
+    setUser(null);
+    if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+      return;
+    }
+    setOpen(false);
+  };
 
 
   return (
@@ -319,6 +330,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                             aria-labelledby='composition-button'
                             onKeyDown={handleListKeyDown}
                             style={{
+
                               maxWidth: '150px',
                               maxHeight: '150px',
                               display: 'flex',
@@ -330,6 +342,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                           >
                             <MenuItem onClick={handleProfile}>My Profile</MenuItem>
                             <MenuItem onClick={handleBookMark}>My BookMarks</MenuItem>
+                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
                             {
                               
                               (user?.result?.role === "administrator" || user?.result?.role === "approver") &&(

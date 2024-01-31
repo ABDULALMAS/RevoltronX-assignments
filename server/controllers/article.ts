@@ -4,6 +4,8 @@ import PostArticle, { PostArticleModel, PostArticleDocument } from '../models/po
 
 const router = express.Router();
 
+<<<<<<< HEAD
+=======
 
 
 
@@ -45,6 +47,7 @@ export const updateArticleStatus = async (req: Request, res: Response) => {
   }
 }
 
+>>>>>>> role-based-access-control
 export const createArticle = async (req: Request, res: Response) => {
   const article = req.body as PostArticleModel;
 

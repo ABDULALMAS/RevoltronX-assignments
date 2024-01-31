@@ -14,7 +14,10 @@ export interface PostArticleModel {
   likes: string[];
   comments: string[];
   createdAt: Date;
+<<<<<<< HEAD
+=======
   status: string;
+>>>>>>> role-based-access-control
 }
 
 export type PostArticleDocument = Document & PostArticleModel;
@@ -36,13 +39,20 @@ const articleSchema = new mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+<<<<<<< HEAD
+=======
   status: {
     type: String,
     enum: ["pending", "approved"],
     default: "pending",
   }
+>>>>>>> role-based-access-control
 });
 
 const PostArticle = mongoose.model<PostArticleDocument>('PostArticle', articleSchema);
 
+<<<<<<< HEAD
 export default PostArticle;
+=======
+export default PostArticle;
+>>>>>>> role-based-access-control
