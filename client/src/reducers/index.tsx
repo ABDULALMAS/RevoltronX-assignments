@@ -6,6 +6,8 @@ import users, { AuthData } from "./auth";
 >>>>>>> role-based-access-control
 import articles, { ArticleState } from "./article";
 import profiles, { ProfileState } from "./profile";
+import bookMarks, {BookMarkState} from './bookMarks';
+import highlights , {highlightsState} from "./highLights";
 
 export interface RootState {
 <<<<<<< HEAD
@@ -15,6 +17,8 @@ export interface RootState {
 >>>>>>> role-based-access-control
   articles: ArticleState;
   profiles: ProfileState[];
+  bookMarks: BookMarkState;
+  highlights: highlightsState;
 }
 
 const rootReducer: Reducer<RootState> = combineReducers({
@@ -25,6 +29,8 @@ const rootReducer: Reducer<RootState> = combineReducers({
 >>>>>>> role-based-access-control
   articles,
   profiles,
+  bookMarks,
+  highlights,
 });
 
 export default rootReducer;

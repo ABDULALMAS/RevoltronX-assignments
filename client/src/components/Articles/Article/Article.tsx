@@ -14,10 +14,13 @@ import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import ThumbUpAltOutlined from "@mui/icons-material/ThumbUpAltOutlined";
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePost, likePost } from "../../../actions/Articles";
+import { createBookMark } from "../../../actions/BookMarks";
 import './styles.css';
 
 
@@ -159,6 +162,14 @@ const Article: React.FC<PostState> = ({ post, setCurrentId , currentId, }) => {
   const openPost = () => {
     navigate(`/articles/${post._id}`);
   };
+
+
+
+  const handleBookmark = () => {
+    dispatch<any>(createBookMark(user.result._id, {articleId: post._id}, navigate))
+  }
+
+
   return (
     <>
     <Card 
@@ -305,6 +316,15 @@ const Article: React.FC<PostState> = ({ post, setCurrentId , currentId, }) => {
           onClick={handleLike}
         >
           <Likes />
+        </Button>
+        <Button
+         size="small"
+         color="primary"
+         disabled={!user?.result}
+         onClick={handleBookmark}
+        >
+
+         <BookmarkAddOutlinedIcon />
         </Button>
         {(user?.result?.googleId === post?.creator ||
           user?.result?._id === post?.creator) && (

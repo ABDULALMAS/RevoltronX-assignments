@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 import articleRoutes from './routes/article.ts'
+import bookMarkRoutes from './routes/bookMarks.ts'
 
 import userRoutes from "./routes/users.ts";
 import profileRoutes from "./routes/profile.ts";
@@ -21,7 +22,8 @@ app.use(bodyParser.json({ limit: "30mb"}));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-app.use("/articles", articleRoutes)
+app.use("/articles", articleRoutes);
+app.use("/bookmarks", bookMarkRoutes);
 app.use("/users", userRoutes);
 app.use("/profile", profileRoutes);
 

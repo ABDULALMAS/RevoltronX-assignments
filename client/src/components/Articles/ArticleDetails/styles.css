@@ -1,13 +1,22 @@
 .media {
-    border-radius: 20px;
-    object-fit: cover;
-    max-width: 600px;
-    min-height: 400px;
-    max-height: 600px;
-  }
+  border-radius: 20px;
+  object-fit: cover;
+  max-width: 600px;
+  min-height: 400px;
+  max-height: 600px;
+}
 
-  section {
-    border-radius: 20px;
-    margin: 10px;
-    flex: 1;
-  }
+section {
+  border-radius: 20px;
+  margin: 10px;
+  flex: 1;
+}
+
+.notes-container {
+  transition: transform 0.8s ease-in-out; /* Adjust the duration and easing function as needed */
+  transform: translateX(100%);
+}
+
+.notes-container.slide-in {
+  transform: translateX(0);/* Slide in by setting margin-left to 0 when 'slide-in' class is applied */
+}
