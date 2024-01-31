@@ -1,10 +1,11 @@
 import axios from "axios";
+<<<<<<< HEAD
+=======
 import article from "../reducers/article";
+>>>>>>> role-based-access-control
 
 interface NewArticle {
-
-
-  tagId?: string,
+  
   category: string,
     selectedFile: string,
     name: string,
@@ -41,8 +42,11 @@ interface FormData {
 
 
 const API = axios.create({
- // baseURL: "http://localhost:5000",
-
+<<<<<<< HEAD
+   
+=======
+    // baseURL: "http://localhost:5000",
+>>>>>>> role-based-access-control
     baseURL: process.env.REACT_APP_BASE_URL,
   });
 
@@ -92,6 +96,8 @@ const API = axios.create({
 
 export const signIn = (FormData : FormData) => API.post("/users/signin", FormData);
 export const signUp = (FormData : FormData) => API.post("/users/signup", FormData);
+<<<<<<< HEAD
+=======
 
 export const getUsers = () => API.get("/users/getUsers");
 export const updateUserRoleAPI = (id:string, role: string) => API.patch(`/users/${id}`,{role});
@@ -99,14 +105,4 @@ export const updateUserRoleAPI = (id:string, role: string) => API.patch(`/users/
 export const getArticlesTableDataApi = () => API.get('/articles/articlesTableData');
 
 export const updateArticleStatusApi = (articleId: string, status: string) => API.patch(`/articles/updateArticleStatus/${articleId}`,{status})
-export const createBookMarkApi = (id: string, articleId: string) => API.post(`/bookmarks/${id}`, {articleId});
-export const getBookMarksApi = (id: string) => API.get(`/bookmarks/${id}`)
-
-
-export const createHighlightsApi = (highlights: string, userId: string, tagId: string) => API.post(`/articles/highlights/${tagId}`,{highlights, userId});
-export const getHighlightsApi = (userId: string, tagId: string) => API.get(`/articles/highlights/${userId}/${tagId}`);
-
-export const updateScrollPositionApi = (scrollPosition: number, userId: string, tagId: string) => API.post(`articles/updateScrollPosition/${tagId}`,{scrollPosition, userId})
-
-export const createNotesApi = (note: any, tagId: string, userId: string) => API.post(`/articles/createNote/${userId}`,{ note, tagId})
-
+>>>>>>> role-based-access-control
