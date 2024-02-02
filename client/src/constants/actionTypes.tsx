@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 
 
-=======
->>>>>>> role-based-access-control
 type Action =
   | "CREATE"
   | "UPDATE"
@@ -15,16 +12,8 @@ type Action =
   | "START_LOADING"
   | "END_LOADING"
   | "AUTH"
-<<<<<<< HEAD
   | "LOGOUT";
 
-=======
-  | "LOGOUT"
-  |"FETCH_ARTICLES_TABLE_DATA"
-  | "UPDATE_ARTICLE_STATUS";
-
-  
->>>>>>> role-based-access-control
 export const CREATE: Action = "CREATE";
 export const UPDATE: Action = "UPDATE";
 export const DELETE: Action = "DELETE";
@@ -39,10 +28,4 @@ export const START_LOADING: Action = "START_LOADING";
 export const END_LOADING: Action = "END_LOADING";
 
 export const AUTH: Action = "AUTH";
-<<<<<<< HEAD
 export const LOGOUT: Action = "LOGOUT";
-=======
-export const LOGOUT: Action = "LOGOUT";
-export const FETCH_ARTICLES_TABLE_DATA: Action = "FETCH_ARTICLES_TABLE_DATA";
-export const UPDATE_ARTICLE_STATUS: Action = "UPDATE_ARTICLE_STATUS";
->>>>>>> role-based-access-control
