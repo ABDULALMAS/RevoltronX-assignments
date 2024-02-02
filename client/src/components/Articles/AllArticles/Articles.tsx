@@ -35,7 +35,10 @@ interface ArticleState {
      likes: string[];
      creator: string;
      comments: string[];
+<<<<<<< HEAD
+=======
      status: string;
+>>>>>>> role-based-access-control
 
 }
   
@@ -54,11 +57,17 @@ const Articles: React.FC<ArticlesProps> = ({ setCurrentId, currentId }) => {
   if (!articles?.length && !isLoading) return <div>No posts</div>;
 
  
+<<<<<<< HEAD
+
+ 
+  let filteredArticles = Object.values(articles);
+=======
   let articlesArray = Object.values(articles);
  
  
 let filteredArticles = articlesArray.filter((approvedArticles) => approvedArticles.status === "approved")
 
+>>>>>>> role-based-access-control
   
 
   if (selectedCategory) {

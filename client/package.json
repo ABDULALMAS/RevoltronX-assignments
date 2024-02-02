@@ -37,7 +37,10 @@
     "redux": "^5.0.0",
     "redux-thunk": "^3.1.0",
     "resolve-url-loader": "^5.0.0",
+<<<<<<< HEAD
+=======
     "styled-components": "^6.1.8",
+>>>>>>> role-based-access-control
     "tinymce": "^6.8.2",
     "web-vitals": "^2.1.4"
   },

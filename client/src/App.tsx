@@ -46,7 +46,10 @@ theme = responsiveFontSizes(theme);
   useEffect(() => {
     
     dispatch<any>(getProfile());
+<<<<<<< HEAD
+=======
     dispatch<any>(getUsers());
+>>>>>>> role-based-access-control
   },[dispatch]);
 
   const user = JSON.parse(localStorage.getItem("profile")!);
