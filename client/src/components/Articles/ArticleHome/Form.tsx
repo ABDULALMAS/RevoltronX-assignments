@@ -1,8 +1,4 @@
-<<<<<<< HEAD
  /* eslint-disable */
-=======
-// /* eslint-disable */
->>>>>>> role-based-access-control
 
 
 
@@ -98,10 +94,6 @@ const Form: React.FC<FormProps> = () => {
     if (!artId) {
       dispatch<any>(createArticle({ ...postData, name: user?.result?.name, creator: user?.result?._id }, navigate));
       clear();
-<<<<<<< HEAD
-=======
-      alert("Your article has been submitted to review!")
->>>>>>> role-based-access-control
     } else {
       dispatch<any>(updatePost(artId, { ...postData, name: user?.result?.name }, navigate));
       navigate("/articles");
