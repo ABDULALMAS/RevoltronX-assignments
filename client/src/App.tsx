@@ -43,7 +43,6 @@ theme = responsiveFontSizes(theme);
   useEffect(() => {
     
     dispatch<any>(getProfile());
-    dispatch<any>(getUsers());
   },[dispatch]);
  
   return (
