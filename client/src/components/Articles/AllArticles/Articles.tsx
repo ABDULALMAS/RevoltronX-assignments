@@ -35,6 +35,7 @@ interface ArticleState {
      likes: string[];
      creator: string;
      comments: string[];
+     status: string;
 
 }
   
@@ -54,8 +55,11 @@ const Articles: React.FC<ArticlesProps> = ({ setCurrentId, currentId }) => {
 
  
 
+  let articlesArray = Object.values(articles);
  
-  let filteredArticles = Object.values(articles);
+ 
+let filteredArticles = articlesArray.filter((approvedArticles) => approvedArticles.status === "approved")
+
   
 
   if (selectedCategory) {

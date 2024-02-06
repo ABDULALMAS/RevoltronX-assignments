@@ -8,6 +8,7 @@ import {
   START_LOADING,
   END_LOADING,
   COMMENT,
+  FETCH_ARTICLES_TABLE_DATA
 } from "../constants/actionTypes.tsx";
 import * as api from "../api/index.tsx";
 import { Dispatch } from "redux";
@@ -52,7 +53,8 @@ export const createArticle = (article: NewArticle, navigate: any) => async (disp
    
     dispatch({ type: CREATE, payload: data });
     
-    navigate(`/articles/${data._id}`);
+    // navigate(`/articles/${data._id}`);
+    navigate("/articles")
 
     dispatch({ type: END_LOADING });
   } catch (error) {
