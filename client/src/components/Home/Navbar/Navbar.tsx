@@ -25,6 +25,7 @@ import { useLocation } from "react-router-dom";
 
 import {jwtDecode} from "jwt-decode";
 
+
 interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = () => {
@@ -34,10 +35,12 @@ const Navbar: React.FC<NavbarProps> = () => {
 
   const location = useLocation();
 
+
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [opened, setOpened] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement | null>(null);
+
   
 
 
@@ -63,6 +66,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
     setUser(JSON.parse(localStorage.getItem("profile")!));
   }, [location]);
+
 
 
   const handleToggle = (e: React.MouseEvent) => {
@@ -140,6 +144,16 @@ const Navbar: React.FC<NavbarProps> = () => {
     navigate('/articles/category/Lifestyle');
   };
 
+
+  const handleLogout = (event: React.MouseEvent<EventTarget>) => {
+    dispatch({ type: 'LOGOUT' });
+    navigate('/auth');
+    setUser(null);
+    if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+      return;
+    }
+    setOpen(false);
+  };
 
 
   return (
@@ -270,8 +284,10 @@ const Navbar: React.FC<NavbarProps> = () => {
           </li>
         </ul>
 
+
         
         { user ? (
+
           <div className='navProfile'>
             <img src={notification} alt='img' className='notificationBell' />
 
@@ -322,8 +338,10 @@ const Navbar: React.FC<NavbarProps> = () => {
                             onKeyDown={handleListKeyDown}
                             style={{
 
+
                               maxWidth: '150px',
                               maxHeight: '150px',
+
                               display: 'flex',
                               flexDirection: 'column',
                               gap: '0px',
@@ -332,6 +350,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                             }}
                           >
                             <MenuItem onClick={handleProfile}>My Profile</MenuItem>
+
                             <MenuItem onClick={handleBookMark}>My BookMarks</MenuItem>
                             <MenuItem onClick={handleLogout}>Logout</MenuItem>
                             {
@@ -344,6 +363,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                                 )
                               }
                               <MenuItem onClick={handleLogout}>Logout</MenuItem>
+
                           </MenuList>
                         </ClickAwayListener>
                       </Paper>

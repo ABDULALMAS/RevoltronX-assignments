@@ -35,7 +35,9 @@ interface ArticleState {
      likes: string[];
      creator: string;
      comments: string[];
+
      status: string;
+
 
 }
   
@@ -54,6 +56,7 @@ const Articles: React.FC<ArticlesProps> = ({ setCurrentId, currentId }) => {
   if (!articles?.length && !isLoading) return <div>No posts</div>;
 
  
+
   let articlesArray = Object.values(articles);
  
  

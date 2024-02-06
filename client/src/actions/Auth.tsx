@@ -26,9 +26,6 @@ export const signin = (formData: FormState, navigate: any) => async (dispatch : 
   }
 };
 
-   
-
-    
 export const signup = (formData: FormState, navigate: any) => async (dispatch : any) => {
   try {
     const { data } = await api.signUp(formData);
@@ -75,3 +72,4 @@ try {
   console.log(error);
 }
 }
+

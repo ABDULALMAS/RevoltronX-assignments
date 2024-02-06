@@ -13,7 +13,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate
   
   
 } from "react-router-dom";
@@ -49,9 +48,6 @@ theme = responsiveFontSizes(theme);
     dispatch<any>(getProfile());
     dispatch<any>(getUsers());
   },[dispatch]);
-
-  const user = JSON.parse(localStorage.getItem("profile")!);
-
  
   return (
     <ThemeProvider theme={theme}>
@@ -68,7 +64,7 @@ theme = responsiveFontSizes(theme);
             />
           <Route
               path="/"
-              element={ <Navigate to ="/edupoint"/> }
+              element={ <Home /> }
             />
           
 
@@ -113,10 +109,6 @@ theme = responsiveFontSizes(theme);
           <Route
               path="/articles/category/:selectedCategory"
               element={ <ArticleHome   /> }
-            />
-          <Route
-              path="/admin/dashboard"
-              element={user?.result?.role === "administrator" || user?.result?.role ==="approver" ?   <Admin   /> : <Auth />}
             />
          
            <Route path='/bookmarks' 

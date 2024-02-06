@@ -42,7 +42,6 @@ interface FormData {
 
 const API = axios.create({
  // baseURL: "http://localhost:5000",
-
     baseURL: process.env.REACT_APP_BASE_URL,
   });
 
@@ -109,4 +108,5 @@ export const getHighlightsApi = (userId: string, tagId: string) => API.get(`/art
 export const updateScrollPositionApi = (scrollPosition: number, userId: string, tagId: string) => API.post(`articles/updateScrollPosition/${tagId}`,{scrollPosition, userId})
 
 export const createNotesApi = (note: any, tagId: string, userId: string) => API.post(`/articles/createNote/${userId}`,{ note, tagId})
+
 

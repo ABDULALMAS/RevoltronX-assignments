@@ -1,4 +1,6 @@
+
 // /* eslint-disable */
+
 
 
 
@@ -95,6 +97,7 @@ const Form: React.FC<FormProps> = () => {
       dispatch<any>(createArticle({ ...postData, name: user?.result?.name, creator: user?.result?._id }, navigate));
       clear();
       alert("Your article has been submitted to review!")
+
     } else {
       dispatch<any>(updatePost(artId, { ...postData, name: user?.result?.name }, navigate));
       navigate("/articles");

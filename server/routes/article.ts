@@ -8,6 +8,7 @@ import { createArticle, getArticles,
    
 
 } from "../controllers/article.ts";
+
 import { getArticlesBySearch } from "../controllers/article.ts";
 import { createHighlights , getHighlights, updateScrollPosition, createNote} from "../controllers/highLights.ts";
 
@@ -23,6 +24,7 @@ router.get("/:id", getArticle);
 router.delete("/:id", auth, deletePost);
 router.patch("/:id", auth, updatePost);
 router.patch("/updateArticleStatus/:id", updateArticleStatus)
+
 
 
 router.post("/", auth,createArticle);
