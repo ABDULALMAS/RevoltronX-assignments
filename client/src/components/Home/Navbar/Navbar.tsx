@@ -1,10 +1,6 @@
 // /* eslint-disable */
 
-<<<<<<< HEAD
-import React, { useState } from 'react';
-=======
 import React, { useState , useEffect} from 'react';
->>>>>>> role-based-access-control
 import './styles.css';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -22,13 +18,10 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import notification from '../../../assets/Notification.svg';
 import navAvatar from '../../../assets/navAvatar.png';
 import arrowDown from '../../../assets/arrowDown.svg';
-<<<<<<< HEAD
-=======
 import { useLocation } from "react-router-dom";
 
 
 import {jwtDecode} from "jwt-decode";
->>>>>>> role-based-access-control
 
 interface NavbarProps {}
 
@@ -36,18 +29,13 @@ const Navbar: React.FC<NavbarProps> = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')!));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-<<<<<<< HEAD
-=======
   const location = useLocation();
 
->>>>>>> role-based-access-control
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [opened, setOpened] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement | null>(null);
 
-<<<<<<< HEAD
-=======
   
 
 
@@ -74,7 +62,6 @@ const Navbar: React.FC<NavbarProps> = () => {
     setUser(JSON.parse(localStorage.getItem("profile")!));
   }, [location]);
 
->>>>>>> role-based-access-control
 
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -141,19 +128,6 @@ const Navbar: React.FC<NavbarProps> = () => {
     navigate('/articles/category/Lifestyle');
   };
 
-<<<<<<< HEAD
-  const handleLogout = (event: React.MouseEvent<EventTarget>) => {
-    dispatch({ type: 'LOGOUT' });
-    navigate('/auth');
-    setUser(null);
-    if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
-      return;
-    }
-    setOpen(false);
-  };
-=======
-
->>>>>>> role-based-access-control
 
   return (
     <>
@@ -283,12 +257,8 @@ const Navbar: React.FC<NavbarProps> = () => {
           </li>
         </ul>
 
-<<<<<<< HEAD
-        {user ? (
-=======
         
         { user ? (
->>>>>>> role-based-access-control
           <div className='navProfile'>
             <img src={notification} alt='img' className='notificationBell' />
 
@@ -339,11 +309,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                             onKeyDown={handleListKeyDown}
                             style={{
                               maxWidth: '118px',
-<<<<<<< HEAD
-                              maxHeight: '88px',
-=======
                               maxHeight: '118px',
->>>>>>> role-based-access-control
                               display: 'flex',
                               flexDirection: 'column',
                               gap: '0px',
@@ -352,9 +318,6 @@ const Navbar: React.FC<NavbarProps> = () => {
                             }}
                           >
                             <MenuItem onClick={handleProfile}>My Profile</MenuItem>
-<<<<<<< HEAD
-                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-=======
                             {
                               
                               (user?.result?.role === "administrator" || user?.result?.role === "approver") &&(
@@ -365,7 +328,6 @@ const Navbar: React.FC<NavbarProps> = () => {
                                 )
                               }
                               <MenuItem onClick={handleLogout}>Logout</MenuItem>
->>>>>>> role-based-access-control
                           </MenuList>
                         </ClickAwayListener>
                       </Paper>

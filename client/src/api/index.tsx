@@ -1,8 +1,5 @@
 import axios from "axios";
-<<<<<<< HEAD
-=======
 import article from "../reducers/article";
->>>>>>> role-based-access-control
 
 interface NewArticle {
   
@@ -42,11 +39,7 @@ interface FormData {
 
 
 const API = axios.create({
-<<<<<<< HEAD
-   
-=======
     // baseURL: "http://localhost:5000",
->>>>>>> role-based-access-control
     baseURL: process.env.REACT_APP_BASE_URL,
   });
 
@@ -96,8 +89,6 @@ const API = axios.create({
 
 export const signIn = (FormData : FormData) => API.post("/users/signin", FormData);
 export const signUp = (FormData : FormData) => API.post("/users/signup", FormData);
-<<<<<<< HEAD
-=======
 
 export const getUsers = () => API.get("/users/getUsers");
 export const updateUserRoleAPI = (id:string, role: string) => API.patch(`/users/${id}`,{role});
@@ -105,4 +96,3 @@ export const updateUserRoleAPI = (id:string, role: string) => API.patch(`/users/
 export const getArticlesTableDataApi = () => API.get('/articles/articlesTableData');
 
 export const updateArticleStatusApi = (articleId: string, status: string) => API.patch(`/articles/updateArticleStatus/${articleId}`,{status})
->>>>>>> role-based-access-control
