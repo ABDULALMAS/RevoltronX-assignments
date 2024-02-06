@@ -4,6 +4,47 @@ import PostArticle, { PostArticleModel, PostArticleDocument } from '../models/po
 
 const router = express.Router();
 
+
+
+
+export const getArticlesTableData = async(req: Request, res: Response) => {
+  try {
+    
+    const artcileTableData =  await PostArticle.find();
+
+  res.status(200).json({
+    data: artcileTableData,
+    message: "Articles Table Data fetched successfully!"
+  })
+} catch (error) {
+  res.status(404).json({message: error.message});
+}
+}
+
+export const updateArticleStatus = async (req: Request, res: Response) => {
+  
+  
+  try {
+    const { id: _id } = req.params;
+    const { status : newStatus} = req.body;
+  
+    if (!mongoose.Types.ObjectId.isValid(_id))
+    return res.status(404).send("No article with that id");
+
+  const updatedArticle = await PostArticle.findByIdAndUpdate(
+    _id,
+    { $set: {status : newStatus}},
+    {new: true}
+  )
+
+  if(updatedArticle)
+  res.json({ message: "Article status updated successfully!",data: updatedArticle})
+
+  } catch (error) {
+    
+  }
+}
+
 export const createArticle = async (req: Request, res: Response) => {
   const article = req.body as PostArticleModel;
 

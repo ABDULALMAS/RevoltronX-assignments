@@ -2,15 +2,19 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import UserModel from "../models/user.ts";
+import mongoose from "mongoose";
+
 
 const secret = "testing";
 
 export const signin = async (req: Request, res: Response) => {
   const { email, password } = req.body ;
+ 
 
   try {
     const oldUser = await UserModel.findOne({ email });
-    console.log(oldUser)
+    
+
 
     if (!oldUser)
       return res.status(404).json({ message: "User doesn't exist" });
@@ -69,3 +73,45 @@ export const signup = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+
+export const getUsers = async (req: Request, res: Response) => {
+try {
+  const Users = await UserModel.find();
+
+
+  res.status(200).json(Users);
+
+} catch (error) {
+  res.status(404).json({message: error.message})
+}
+}
+
+export const updateRole = async (req: Request, res: Response) => {
+  try {
+    const { id: _id} = req.params;
+    const  {role: newRole}  = req.body;
+
+
+    if (!mongoose.Types.ObjectId.isValid(_id))
+    return res.status(404).send("No user with that id");
+
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      _id,
+      { $set: { role: newRole } },
+      {new: true}
+      )
+      
+      console.log(updatedUser)
+if(updatedUser) {
+  res.json({message: "User Role Updated Successfully", user: updatedUser})
+}
+else{
+  res.status(404).json({message: "User not found"});
+}
+
+  } catch (error) {
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+

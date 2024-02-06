@@ -29,6 +29,9 @@ import YoutubeVideos from './components/Videos/YoutubeVideo';
 import Courses from './components/Courses/Courses';
 import Form from './components/Articles/ArticleHome/Form';
 import Footer from './components/Home/Footer/Footer';
+import Admin from './components/Dashboard/Admin';
+import { getUsers } from './actions/Auth';
+import BookMarks from './components/BookMarks/BookMarks';
 
 
 function App() {
@@ -43,6 +46,7 @@ theme = responsiveFontSizes(theme);
   useEffect(() => {
     
     dispatch<any>(getProfile());
+    dispatch<any>(getUsers());
   },[dispatch]);
  
   return (
@@ -107,7 +111,9 @@ theme = responsiveFontSizes(theme);
               element={ <ArticleHome   /> }
             />
          
-
+           <Route path='/bookmarks' 
+           element= { <BookMarks />}
+           />
           
           </Routes>
         <Footer />
@@ -118,3 +124,4 @@ theme = responsiveFontSizes(theme);
 }
 
 export default App;
+

@@ -8,6 +8,7 @@ import {
   START_LOADING,
   END_LOADING,
   COMMENT,
+  FETCH_ARTICLES_TABLE_DATA
 } from "../constants/actionTypes.tsx";
 import * as api from "../api/index.tsx";
 import { Dispatch } from "redux";
@@ -15,7 +16,7 @@ import { Dispatch } from "redux";
 
 interface NewArticle {
 
-  
+  tagId?: string;
   category: string,
   selectedFile: string,
   name: string,
@@ -52,7 +53,8 @@ export const createArticle = (article: NewArticle, navigate: any) => async (disp
    
     dispatch({ type: CREATE, payload: data });
     
-    navigate(`/articles/${data._id}`);
+    // navigate(`/articles/${data._id}`);
+    navigate("/articles")
 
     dispatch({ type: END_LOADING });
   } catch (error) {
@@ -130,3 +132,45 @@ export const updatePost = (id: string, post: NewArticle, navigate: any) => async
     console.log(error);
   }
 };
+
+
+export const createHighlights = (highlightedText: string, userId: string, tagId: string) => async(dispatch: any) => {
+try {
+  const { data } = await api.createHighlightsApi(highlightedText,userId,tagId);
+  console.log(data)
+
+} catch (error) {
+  console.log(error);
+}
+}
+
+export const getHighlights = ( userId: string, tagId: string) => async(dispatch: any) => {
+try {
+  const { data } = await api.getHighlightsApi(userId, tagId);
+
+  dispatch({type: "FETCH_HIGHLIGHTS", payload: data.result})
+  console.log(data)
+
+} catch (error) {
+  console.log(error);
+}
+}
+
+export const updateScrollPosition = (scrollPosition: number, userId: string, tagId: string) => async (dispatch: any) => {
+try {
+  const { data } = await api.updateScrollPositionApi(scrollPosition, userId, tagId);
+  console.log(data)
+} catch (error) {
+  console.log(error);
+}
+}
+
+export const createNotes = (note: any, tagId: string, userId: string) => async (dispatch: any) => {
+
+  try {
+    console.log("note to be added: " , note)
+    const { data } = await api.createNotesApi(note, tagId, userId);
+  } catch (error) {
+    
+  }
+}

@@ -1,6 +1,7 @@
 // /* eslint-disable */
 
-import React, { useState } from 'react';
+
+import React, { useState , useEffect} from 'react';
 import './styles.css';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -19,16 +20,53 @@ import notification from '../../../assets/Notification.svg';
 import navAvatar from '../../../assets/navAvatar.png';
 import arrowDown from '../../../assets/arrowDown.svg';
 
+import { useLocation } from "react-router-dom";
+
+
+import {jwtDecode} from "jwt-decode";
+
+
 interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')!));
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [opened, setOpened] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement | null>(null);
+
+  
+
+
+  const handleLogout = (event?: React.MouseEvent<EventTarget> | undefined) => {
+    dispatch({ type: 'LOGOUT' });
+    navigate('/auth');
+    setUser(null);
+    if (anchorRef.current && anchorRef.current.contains(event?.target as Node)) {
+      return;
+    }
+    setOpen(false);
+  };
+
+
+  useEffect(() => {
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+
+      if (decodedToken && decodedToken.exp && decodedToken.exp * 1000 < new Date().getTime()) handleLogout(undefined)
+    }
+
+    setUser(JSON.parse(localStorage.getItem("profile")!));
+  }, [location]);
+
 
 
   const handleToggle = (e: React.MouseEvent) => {
@@ -67,6 +105,16 @@ const Navbar: React.FC<NavbarProps> = () => {
     setOpen(false);
   };
 
+
+  const handleBookMark = (event: React.MouseEvent<EventTarget>) => {
+    event.stopPropagation();
+    navigate("/bookmarks");
+    if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
+      return;
+    }
+    setOpen(false);
+  }
+
   function handleListKeyDown(event: React.KeyboardEvent) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -96,6 +144,7 @@ const Navbar: React.FC<NavbarProps> = () => {
     navigate('/articles/category/Lifestyle');
   };
 
+
   const handleLogout = (event: React.MouseEvent<EventTarget>) => {
     dispatch({ type: 'LOGOUT' });
     navigate('/auth');
@@ -105,6 +154,7 @@ const Navbar: React.FC<NavbarProps> = () => {
     }
     setOpen(false);
   };
+
 
   return (
     <>
@@ -234,7 +284,10 @@ const Navbar: React.FC<NavbarProps> = () => {
           </li>
         </ul>
 
-        {user ? (
+
+        
+        { user ? (
+
           <div className='navProfile'>
             <img src={notification} alt='img' className='notificationBell' />
 
@@ -284,8 +337,11 @@ const Navbar: React.FC<NavbarProps> = () => {
                             aria-labelledby='composition-button'
                             onKeyDown={handleListKeyDown}
                             style={{
-                              maxWidth: '118px',
-                              maxHeight: '88px',
+
+
+                              maxWidth: '150px',
+                              maxHeight: '150px',
+
                               display: 'flex',
                               flexDirection: 'column',
                               gap: '0px',
@@ -294,7 +350,20 @@ const Navbar: React.FC<NavbarProps> = () => {
                             }}
                           >
                             <MenuItem onClick={handleProfile}>My Profile</MenuItem>
+
+                            <MenuItem onClick={handleBookMark}>My BookMarks</MenuItem>
                             <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                            {
+                              
+                              (user?.result?.role === "administrator" || user?.result?.role === "approver") &&(
+                                <Link to="/admin/dashboard" style={{textDecoration: "none", color: "inherit"}} onClick={() =>setOpen(false)}>
+                            <MenuItem >Dashboard</MenuItem>
+                              </Link>
+                                
+                                )
+                              }
+                              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+
                           </MenuList>
                         </ClickAwayListener>
                       </Paper>

@@ -14,6 +14,8 @@ export interface PostArticleModel {
   likes: string[];
   comments: string[];
   createdAt: Date;
+  status: string;
+
 }
 
 export type PostArticleDocument = Document & PostArticleModel;
@@ -35,8 +37,16 @@ const articleSchema = new mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  status: {
+    type: String,
+    enum: ["pending", "approved"],
+    default: "pending",
+  }
+
 });
 
 const PostArticle = mongoose.model<PostArticleDocument>('PostArticle', articleSchema);
 
+
 export default PostArticle;
+
