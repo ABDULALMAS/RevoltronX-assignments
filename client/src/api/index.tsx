@@ -1,6 +1,4 @@
 import axios from "axios";
-import article from "../reducers/article";
-
 
 interface NewArticle {
   
@@ -40,8 +38,7 @@ interface FormData {
 
 
 const API = axios.create({
-    // baseURL: "http://localhost:5000",
-
+   
     baseURL: process.env.REACT_APP_BASE_URL,
   });
 
@@ -91,11 +88,3 @@ const API = axios.create({
 
 export const signIn = (FormData : FormData) => API.post("/users/signin", FormData);
 export const signUp = (FormData : FormData) => API.post("/users/signup", FormData);
-
-export const getUsers = () => API.get("/users/getUsers");
-export const updateUserRoleAPI = (id:string, role: string) => API.patch(`/users/${id}`,{role});
-
-export const getArticlesTableDataApi = () => API.get('/articles/articlesTableData');
-
-export const updateArticleStatusApi = (articleId: string, status: string) => API.patch(`/articles/updateArticleStatus/${articleId}`,{status})
-
