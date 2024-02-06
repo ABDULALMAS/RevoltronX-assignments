@@ -1,6 +1,7 @@
 import axios from "axios";
 import article from "../reducers/article";
 
+
 interface NewArticle {
   
   category: string,
@@ -40,6 +41,7 @@ interface FormData {
 
 const API = axios.create({
     // baseURL: "http://localhost:5000",
+
     baseURL: process.env.REACT_APP_BASE_URL,
   });
 
@@ -96,3 +98,4 @@ export const updateUserRoleAPI = (id:string, role: string) => API.patch(`/users/
 export const getArticlesTableDataApi = () => API.get('/articles/articlesTableData');
 
 export const updateArticleStatusApi = (articleId: string, status: string) => API.patch(`/articles/updateArticleStatus/${articleId}`,{status})
+

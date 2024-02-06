@@ -126,7 +126,6 @@ export const commentPost = (value: any, id: string) => async (dispatch :any) => 
 export const updatePost = (id: string, post: NewArticle, navigate: any) => async (dispatch :any) => {
   try {
     const { data } = await api.updatePost(id, post);
-   
     dispatch({ type: UPDATE, payload: data });
     navigate("/articles")
   } catch (error) {

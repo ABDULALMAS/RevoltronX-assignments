@@ -22,7 +22,6 @@ import { useLocation } from "react-router-dom";
 
 
 import {jwtDecode} from "jwt-decode";
-
 interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = () => {
@@ -30,7 +29,6 @@ const Navbar: React.FC<NavbarProps> = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [opened, setOpened] = React.useState(false);
@@ -127,7 +125,6 @@ const Navbar: React.FC<NavbarProps> = () => {
   const handleLifestyle = () => {
     navigate('/articles/category/Lifestyle');
   };
-
 
   return (
     <>
@@ -259,6 +256,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
         
         { user ? (
+
           <div className='navProfile'>
             <img src={notification} alt='img' className='notificationBell' />
 

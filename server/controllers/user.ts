@@ -4,7 +4,6 @@ import { Request, Response } from "express";
 import UserModel from "../models/user.ts";
 import mongoose from "mongoose";
 
-
 const secret = "testing";
 
 export const signin = async (req: Request, res: Response) => {
@@ -13,7 +12,7 @@ export const signin = async (req: Request, res: Response) => {
 
   try {
     const oldUser = await UserModel.findOne({ email });
-    
+   
 
     if (!oldUser)
       return res.status(404).json({ message: "User doesn't exist" });
@@ -42,7 +41,6 @@ export const signin = async (req: Request, res: Response) => {
 
 export const signup = async (req: Request, res: Response) => {
   const { email, password, firstName, lastName } = req.body;
-  
 
   try {
     const oldUser = await UserModel.findOne({ email });

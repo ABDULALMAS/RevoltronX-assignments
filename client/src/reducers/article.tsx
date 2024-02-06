@@ -98,3 +98,4 @@ export default (state : ArticleState = { isLoading: true, articles: [] }, action
       return state;
   }
 };
+

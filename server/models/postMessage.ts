@@ -36,6 +36,7 @@ const articleSchema = new mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+
   status: {
     type: String,
     enum: ["pending", "approved"],
@@ -45,4 +46,6 @@ const articleSchema = new mongoose.Schema({
 
 const PostArticle = mongoose.model<PostArticleDocument>('PostArticle', articleSchema);
 
+
 export default PostArticle;
+
