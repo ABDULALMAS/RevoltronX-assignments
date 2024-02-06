@@ -12,6 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { createArticle, updatePost } from "../../../actions/Articles";
+import axios from 'axios'; // Axios is imported
 
 interface FormProps {}
 
@@ -63,6 +64,8 @@ const Form: React.FC<FormProps> = () => {
     selectedFile: "",
   });
 
+  const [autotags, setAutotags] = useState<string[]>([]); // Created New state for autotags
+
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile")!) as { result: { name: string; _id: string } };
   const navigate = useNavigate();
@@ -83,12 +86,25 @@ const Form: React.FC<FormProps> = () => {
       tags: [],
       selectedFile: "",
     });
+    setAutotags([]); // Cleared autotags
   };
 
   useEffect(() => {
     if (!post?.title) clear();
     if (post) setPostData(post);
   }, [post]);
+
+  const handleAutotagging = async () => {
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/predict', {
+        text: postData.message, // Added API to the server port
+      });
+
+      setAutotags(response.data.tags);
+    } catch (error) {
+      console.error('Error during autotagging:', error);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
