@@ -140,15 +140,6 @@ const Navbar: React.FC<NavbarProps> = () => {
     navigate('/articles/category/Lifestyle');
   };
 
-  const handleLogout = (event: React.MouseEvent<EventTarget>) => {
-    dispatch({ type: 'LOGOUT' });
-    navigate('/auth');
-    setUser(null);
-    if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
-      return;
-    }
-    setOpen(false);
-  };
 
 
   return (

@@ -1,38 +1,12 @@
-<<<<<<< HEAD
-/* eslint-disable */
-
-export interface AuthState {
-  authData: AuthData  | null  | undefined;
-}
-=======
 import { act } from "react-dom/test-utils"
 
 
->>>>>>> role-based-access-control
 
 interface AuthAction {
   type: string;
   data?: AuthData;
 }
 
-<<<<<<< HEAD
-interface AuthData {
- 
-  id: string;
-  name: string;
-
-}
-
-const authReducer = (state: AuthState = { authData: null }, action: AuthAction): AuthState => {
-
-  switch (action.type) {
-    case "AUTH":
-      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
-      return { ...state, authData: action?.data };
-    case "LOGOUT":
-      localStorage.clear();
-      return { ...state, authData: null };
-=======
  export interface AuthData {
   users: {
 
@@ -72,7 +46,6 @@ const authReducer = (state: AuthData = { users: [] }, action: any) => {
         users: state.users.map((user) => 
         (user._id === action.payload._id ? { ...user, role: action.payload.role } : user))}
         
->>>>>>> role-based-access-control
     default:
       return state;
   }
