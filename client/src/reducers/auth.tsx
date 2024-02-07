@@ -1,6 +1,4 @@
-
 import { act } from "react-dom/test-utils"
-
 
 
 
@@ -8,7 +6,6 @@ interface AuthAction {
   type: string;
   data?: AuthData;
 }
-
 
  export interface AuthData {
   users: {
@@ -49,7 +46,6 @@ const authReducer = (state: AuthData = { users: [] }, action: any) => {
         users: state.users.map((user) => 
         (user._id === action.payload._id ? { ...user, role: action.payload.role } : user))}
         
-
     default:
       return state;
   }

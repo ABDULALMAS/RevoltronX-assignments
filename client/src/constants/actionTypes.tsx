@@ -1,4 +1,3 @@
-
 type Action =
   | "CREATE"
   | "UPDATE"
@@ -16,7 +15,6 @@ type Action =
   | "UPDATE_ARTICLE_STATUS";
 
   
-
 export const CREATE: Action = "CREATE";
 export const UPDATE: Action = "UPDATE";
 export const DELETE: Action = "DELETE";

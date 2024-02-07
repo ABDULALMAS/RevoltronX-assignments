@@ -8,7 +8,6 @@ import { createArticle, getArticles,
    
 
 } from "../controllers/article.ts";
-
 import { getArticlesBySearch } from "../controllers/article.ts";
 import { createHighlights , getHighlights, updateScrollPosition, createNote} from "../controllers/highLights.ts";
 
@@ -26,7 +25,6 @@ router.patch("/:id", auth, updatePost);
 router.patch("/updateArticleStatus/:id", updateArticleStatus)
 
 
-
 router.post("/", auth,createArticle);
 
 router.post("/highlights/:id", createHighlights)
@@ -40,4 +38,5 @@ router.patch("/:id/likePost", auth,likePost);
 
 
 export default router;
+
 

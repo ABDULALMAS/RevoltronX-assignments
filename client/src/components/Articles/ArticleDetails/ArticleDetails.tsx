@@ -1,4 +1,6 @@
 
+
+
 /* eslint-disable */
 import React, { useEffect, useState, useRef} from 'react';
 import {
@@ -22,6 +24,8 @@ import debounce from 'debounce';
 import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 import Notes from './Notes';
 import Tooltip from '@mui/material/Tooltip';
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
+import VoiceSelectComponent from './VoiceOptions';
 
 
 interface RootState {
@@ -84,6 +88,10 @@ const Post = () => {
     const [openNotesRender, setOpenNotesRender] = useState<boolean>(false);
     const articleContainerRef = useRef<HTMLParagraphElement | null>(null);
     const [highlightedContent, setHighlightedContent] = useState<string>(post?.message);
+    const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const [selectedVoice, setSelectedVoice] = useState<any>(null);
+
+
 
    
 
@@ -228,8 +236,30 @@ useEffect(() => {
             }
           };
       
+
+
+    
       
    
+const handleTextToAudio = async() => {
+  const tempElement = document.createElement('div');
+
+    tempElement.innerHTML = post.message;
+
+    const plainText = tempElement.textContent || tempElement.innerText;
+
+
+    const utterance = new SpeechSynthesisUtterance(plainText);
+    utterance.voice =  selectedVoice; 
+    utteranceRef.current = utterance; 
+    speechSynthesis.speak(utterance);
+    speechSynthesis.cancel();
+
+};
+    
+  
+
+
 
 
   
@@ -261,6 +291,7 @@ useEffect(() => {
 
   return (
     <ThemeProvider theme={theme}>
+      <VoiceSelectComponent selectedVoice={selectedVoice} setSelectedVoice={setSelectedVoice} />
       <Paper style={{ padding: '20px', borderRadius: '15px', marginTop: '30px', marginInline: '30px' }} elevation={6}>
       <Tooltip title="Add Note" arrow>
       <Button
@@ -273,7 +304,20 @@ useEffect(() => {
           <NotesOutlinedIcon/>
         </Button>
         </Tooltip>
+      <Tooltip title="Text to Speech" arrow>
 
+        <Button
+      sx={{
+        display:"flex",
+      }}
+        onClick={handleTextToAudio}
+        size='small'
+        >
+          <KeyboardVoiceIcon/>
+        </Button>
+        </Tooltip>
+       
+       
       <Box 
       sx={{
         display: "flex",

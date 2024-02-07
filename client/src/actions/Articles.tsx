@@ -66,7 +66,7 @@ export const getArticles = (page: number | string) => async (dispatch: any) => {
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.fetchArticles(page);
-  
+   console.log(data)
 
     dispatch({ type: FETCH_ALL, payload: data });
     dispatch({ type: END_LOADING });
@@ -126,6 +126,7 @@ export const commentPost = (value: any, id: string) => async (dispatch :any) => 
 export const updatePost = (id: string, post: NewArticle, navigate: any) => async (dispatch :any) => {
   try {
     const { data } = await api.updatePost(id, post);
+   
     dispatch({ type: UPDATE, payload: data });
     navigate("/articles")
   } catch (error) {

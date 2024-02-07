@@ -5,6 +5,7 @@ import mongoose, { Document } from 'mongoose';
 
 export interface PostArticleModel {
   title: string;
+  tagId?: string;
   category: string;
   message: string;
   name: string;
@@ -15,12 +16,12 @@ export interface PostArticleModel {
   comments: string[];
   createdAt: Date;
   status: string;
-
 }
 
 export type PostArticleDocument = Document & PostArticleModel;
 
 const articleSchema = new mongoose.Schema({
+  tagId: String,
   title: String,
   category: String,
   message: String,
@@ -42,11 +43,9 @@ const articleSchema = new mongoose.Schema({
     enum: ["pending", "approved"],
     default: "pending",
   }
-
 });
 
 const PostArticle = mongoose.model<PostArticleDocument>('PostArticle', articleSchema);
-
 
 export default PostArticle;
 

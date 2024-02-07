@@ -1,6 +1,5 @@
 // /* eslint-disable */
 
-
 import React, { useState , useEffect} from 'react';
 import './styles.css';
 import { Link } from 'react-router-dom';
@@ -19,12 +18,11 @@ import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import notification from '../../../assets/Notification.svg';
 import navAvatar from '../../../assets/navAvatar.png';
 import arrowDown from '../../../assets/arrowDown.svg';
-
 import { useLocation } from "react-router-dom";
 
 
-import {jwtDecode} from "jwt-decode";
 
+import {jwtDecode} from "jwt-decode";
 
 interface NavbarProps {}
 
@@ -32,9 +30,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')!));
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const location = useLocation();
-
 
   const [toggle, setToggle] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -66,7 +62,6 @@ const Navbar: React.FC<NavbarProps> = () => {
 
     setUser(JSON.parse(localStorage.getItem("profile")!));
   }, [location]);
-
 
 
   const handleToggle = (e: React.MouseEvent) => {
@@ -144,17 +139,7 @@ const Navbar: React.FC<NavbarProps> = () => {
     navigate('/articles/category/Lifestyle');
   };
 
-
-  const handleLogout = (event: React.MouseEvent<EventTarget>) => {
-    dispatch({ type: 'LOGOUT' });
-    navigate('/auth');
-    setUser(null);
-    if (anchorRef.current && anchorRef.current.contains(event.target as Node)) {
-      return;
-    }
-    setOpen(false);
-  };
-
+ 
 
   return (
     <>
@@ -162,12 +147,14 @@ const Navbar: React.FC<NavbarProps> = () => {
         <h1>
           <strong>
             {' '}
-            <a href='/edupoint'>Pro Edu</a>
+            <Link to="/edupoint">Pro Edu</Link>
+            {/* <a href='/edupoint'>Pro Edu</a> */}
           </strong>
         </h1>
         <ul>
           <li>
-            <a href='/edupoint'>Home</a>
+            <Link to="/edupoint">Home</Link>
+            {/* <a href='/edupoint'>Home</a> */}
           </li>
 
           <div className='articlesDropDown'>
@@ -274,20 +261,23 @@ const Navbar: React.FC<NavbarProps> = () => {
             </Stack>
           </div>
           <li>
-            <a href='/courses'>Courses</a>
+          <Link to='/courses'>
+                Courses
+              </Link>
+            {/* <a href='/courses'>Courses</a> */}
           </li>
           <li>
             <a href='/videos'>Videos</a>
           </li>
           <li>
-            <a href='/news'>News</a>
+          <Link to="/news">News</Link>
+
+            {/* <a href='/news'>News</a> */}
           </li>
         </ul>
 
-
         
         { user ? (
-
           <div className='navProfile'>
             <img src={notification} alt='img' className='notificationBell' />
 
@@ -337,11 +327,8 @@ const Navbar: React.FC<NavbarProps> = () => {
                             aria-labelledby='composition-button'
                             onKeyDown={handleListKeyDown}
                             style={{
-
-
                               maxWidth: '150px',
                               maxHeight: '150px',
-
                               display: 'flex',
                               flexDirection: 'column',
                               gap: '0px',
@@ -350,9 +337,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                             }}
                           >
                             <MenuItem onClick={handleProfile}>My Profile</MenuItem>
-
                             <MenuItem onClick={handleBookMark}>My BookMarks</MenuItem>
-                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
                             {
                               
                               (user?.result?.role === "administrator" || user?.result?.role === "approver") &&(
@@ -363,7 +348,6 @@ const Navbar: React.FC<NavbarProps> = () => {
                                 )
                               }
                               <MenuItem onClick={handleLogout}>Logout</MenuItem>
-
                           </MenuList>
                         </ClickAwayListener>
                       </Paper>
@@ -384,4 +368,5 @@ const Navbar: React.FC<NavbarProps> = () => {
 };
 
 export default Navbar;
+    
     

@@ -15,7 +15,6 @@ export const signin = async (req: Request, res: Response) => {
     const oldUser = await UserModel.findOne({ email });
     
 
-
     if (!oldUser)
       return res.status(404).json({ message: "User doesn't exist" });
 
@@ -43,6 +42,7 @@ export const signin = async (req: Request, res: Response) => {
 
 export const signup = async (req: Request, res: Response) => {
   const { email, password, firstName, lastName } = req.body;
+  
 
   try {
     const oldUser = await UserModel.findOne({ email });
@@ -73,7 +73,6 @@ export const signup = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-
 
 export const getUsers = async (req: Request, res: Response) => {
 try {

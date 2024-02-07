@@ -11,7 +11,6 @@ import {
   COMMENT,
   FETCH_ARTICLES_TABLE_DATA,
   UPDATE_ARTICLE_STATUS,
-
 } from "../constants/actionTypes";
 
 
@@ -20,6 +19,7 @@ export interface ArticleState {
   isLoading: any;
   articles: {
     _id: string; 
+    tagId?: string;
     category: string , 
     selectedFile: string;
        name: string;
@@ -99,4 +99,3 @@ export default (state : ArticleState = { isLoading: true, articles: [] }, action
       return state;
   }
 };
-

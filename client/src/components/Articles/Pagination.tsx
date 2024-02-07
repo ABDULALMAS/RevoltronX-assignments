@@ -14,15 +14,25 @@ interface Paginate {
 }
 
 const Paginate: React.FC<Paginate> = ({ page}) => { 
-  const { numberOfPages } = useSelector((state: any) => state.articles);
+  const { numberOfPages, currentPage} = useSelector((state: any) => state.articles);
     
     const dispatch = useDispatch();
     useEffect(() => {
-    if(page) {
-      dispatch<any>(getArticles(page));
-    }
-    }, [page]);
+      if(page !== currentPage ) {
+        dispatch<any>(getArticles(page));
+      }
+    }, [page, currentPage]);
+    
+    console.log("currentPage:",currentPage)
+  
 
+
+
+   
+ 
+  
+  
+  
 
 return ( 
     <Pagination 
@@ -31,7 +41,7 @@ return (
     marginTop: "1rem",
     padding: "16px",
     }}
-      // classes={{ul: classes.ul}}
+     
       count={numberOfPages} 
       page={Number(page) || 1}
       variant="outlined"
