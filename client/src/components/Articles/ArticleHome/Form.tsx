@@ -1,4 +1,6 @@
+
 // /* eslint-disable */
+
 
 
 
@@ -11,6 +13,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { createArticle, updatePost } from "../../../actions/Articles";
 import axios from 'axios'; // Axios is imported
+import { AxiosError } from 'axios';
 
 interface FormProps {}
 
@@ -94,15 +97,26 @@ const Form: React.FC<FormProps> = () => {
 
   const handleAutotagging = async () => {
     try {
-      const response = await axios.post('http://127.0.0.1:5000/predict', {
-        text: postData.message, // Added API to the server port
+      const response = await axios.post('http://127.0.0.1:8000/predict', {
+        text: postData.message,
       });
-
       setAutotags(response.data.tags);
     } catch (error) {
-      console.error('Error during autotagging:', error);
+      console.error('Error during autotagging:', (error as Error).message);
+  
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response) {
+          console.error('Response data:', axiosError.response.data);
+          console.error('Response status:', axiosError.response.status);
+          console.error('Response headers:', axiosError.response.headers);
+        }
+      } else {
+        console.error('Unknown error during autotagging:', error);
+      }
     }
-  };
+  };  
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,6 +125,7 @@ const Form: React.FC<FormProps> = () => {
       dispatch<any>(createArticle({ ...postData, name: user?.result?.name, creator: user?.result?._id }, navigate));
       clear();
       alert("Your article has been submitted to review!")
+
     } else {
       dispatch<any>(updatePost(artId, { ...postData, name: user?.result?.name }, navigate));
       navigate("/articles");
@@ -266,6 +281,22 @@ const Form: React.FC<FormProps> = () => {
             >
               Clear
             </Button>
+            <Button
+              sx={{
+                display: "flex",
+                height: "45px",
+                marginInline: "auto",
+                width: "250px",
+                marginBottom: "10px",
+              }}
+              variant="contained"
+              color="secondary"
+              size="small"
+              onClick={handleAutotagging}
+              fullWidth
+            >
+              Autotag
+            </Button>
           </div>
         </form>
         </Box>
@@ -275,4 +306,3 @@ const Form: React.FC<FormProps> = () => {
 };
 
 export default Form;
-
